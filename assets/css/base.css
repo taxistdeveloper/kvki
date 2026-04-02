@@ -1,0 +1,60 @@
+/**
+ * Base — design tokens
+ * Стиль siter.kz / turan.edu.kz — чистый корпоративный
+ */
+
+:root {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-gray-50: #f9fafb;
+  --color-gray-200: #e5e7eb;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --radius-md: 8px;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: thin;
+  scrollbar-color: #6b8e6b #f5f1eb;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f1eb;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #6b8e6b;
+  border-radius: 5px;
+  border: 2px solid #f5f1eb;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5a7d5a;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #4a6d4a;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+}

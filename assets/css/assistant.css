@@ -1,0 +1,345 @@
+/**
+ * ИИ-ассистент КВКИ — стили виджета с персонажем
+ */
+.kvki-assistant {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+    font-family: 'Nunito', system-ui, sans-serif;
+}
+
+/* Персонаж */
+.kvki-mascot {
+    display: block;
+}
+
+.kvki-assistant-toggle {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.85rem 0.4rem 0.4rem;
+    background: linear-gradient(135deg, #4a6d4a 0%, #3d5c3d 100%);
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 4px 20px rgba(45, 74, 45, 0.45), 0 0 0 3px rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+.kvki-assistant-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 28px rgba(45, 74, 45, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.kvki-assistant-toggle:focus {
+    outline: 2px solid #5a7d5a;
+    outline-offset: 2px;
+}
+
+.kvki-assistant-toggle-avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.kvki-assistant-toggle:hover .kvki-assistant-toggle-avatar {
+    transform: scale(1.08);
+}
+
+.kvki-assistant-toggle-avatar .kvki-mascot {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.kvki-assistant-toggle-label {
+    padding-right: 0.25rem;
+}
+
+.kvki-assistant-panel {
+    position: absolute;
+    bottom: 4rem;
+    right: 1rem;
+    width: min(380px, calc(100vw - 2rem));
+    max-height: min(520px, calc(100vh - 6rem));
+    background: #fefdfb;
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 48px rgba(26, 32, 44, 0.18), 0 0 0 1px rgba(74, 109, 74, 0.08);
+    border: 1px solid #f5f1eb;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px) scale(0.96);
+    transition: opacity 0.3s ease, visibility 0.3s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.kvki-assistant-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.kvki-assistant-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(135deg, #4a6d4a 0%, #3d5c3d 100%);
+    color: #fff;
+    border-radius: 1.25rem 1.25rem 0 0;
+}
+
+.kvki-assistant-header-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.kvki-assistant-header-avatar .kvki-mascot {
+    width: 2rem;
+    height: 2rem;
+}
+
+.kvki-assistant-header-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.kvki-assistant-header-title {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    display: block;
+}
+
+.kvki-assistant-header-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    display: block;
+    margin-top: 0.1rem;
+}
+
+.kvki-assistant-header-status {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+}
+
+.kvki-assistant-header-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #86efac;
+    border-radius: 50%;
+    animation: kvki-pulse 2s ease-in-out infinite;
+}
+
+@keyframes kvki-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.kvki-assistant-close {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 0.5rem;
+    color: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.kvki-assistant-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.kvki-assistant-close svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.kvki-assistant-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 200px;
+    max-height: 320px;
+}
+
+.kvki-assistant-msg {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.kvki-assistant-msg--user {
+    justify-content: flex-end;
+}
+
+.kvki-assistant-msg--bot {
+    justify-content: flex-start;
+}
+
+.kvki-assistant-msg-avatar {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #5a7d5a 0%, #4a6d4a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.kvki-assistant-msg-avatar .kvki-mascot {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.kvki-assistant-msg--user .kvki-assistant-msg-avatar {
+    display: none;
+}
+
+.kvki-assistant-msg-bubble {
+    max-width: 85%;
+    padding: 0.7rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.kvki-assistant-msg--user .kvki-assistant-msg-bubble {
+    background: linear-gradient(135deg, #4a6d4a 0%, #3d5c3d 100%);
+    color: #fff;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.kvki-assistant-msg--bot .kvki-assistant-msg-bubble {
+    background: #f5f1eb;
+    color: #1a202c;
+    border: 1px solid #ebe6de;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.kvki-assistant-typing {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.kvki-assistant-typing::before,
+.kvki-assistant-typing::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #5a7d5a;
+    border-radius: 50%;
+    animation: kvki-typing 1.2s ease-in-out infinite;
+}
+
+.kvki-assistant-typing::before { animation-delay: 0s; }
+.kvki-assistant-typing::after { animation-delay: 0.2s; }
+
+@keyframes kvki-typing {
+    0%, 60%, 100% { opacity: 0.4; transform: scale(0.9); }
+    30% { opacity: 1; transform: scale(1); }
+}
+
+.kvki-assistant-input-wrap {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid #ebe6de;
+    background: #faf8f5;
+    border-radius: 0 0 1.25rem 1.25rem;
+}
+
+.kvki-assistant-input {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    border: 1px solid #f5f1eb;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: none;
+    min-height: 42px;
+    max-height: 120px;
+    transition: border-color 0.2s;
+}
+
+.kvki-assistant-input:focus {
+    outline: none;
+    border-color: #5a7d5a;
+}
+
+.kvki-assistant-send {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #4a6d4a;
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.kvki-assistant-send:hover:not(:disabled) {
+    background: #3d5c3d;
+}
+
+.kvki-assistant-send:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.kvki-assistant-send svg {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+/* Мобильная нижняя навигация — сдвигаем кнопку выше */
+.has-mobile-nav .kvki-assistant-toggle {
+    bottom: 4.5rem;
+}
+
+@media (max-width: 480px) {
+    .kvki-assistant-panel {
+        right: 0.5rem;
+        left: 0.5rem;
+        width: auto;
+        bottom: 5rem;
+    }
+}

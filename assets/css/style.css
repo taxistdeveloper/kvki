@@ -1,0 +1,71 @@
+/**
+ * КГКП Карагандинский высший колледж инжиниринга
+ * Стиль siter.kz / turan.edu.kz
+ */
+
+@import 'base.css';
+@import 'components.css';
+@import 'layout.css';
+@import 'mobile.css';
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.95; }
+}
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Карта в футере — анимированный маркер колледжа */
+#footer-map {
+  min-height: 12rem;
+}
+.footer-map-marker-container {
+  background: none !important;
+  border: none !important;
+}
+.footer-map-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+.footer-map-marker-pin {
+  position: relative;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #2d4a2d 0%, #3d5c3d 100%);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 3px solid #faf8f5;
+  animation: footer-marker-bounce 2s ease-in-out infinite;
+}
+.footer-map-marker-pulse {
+  position: absolute;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  background: rgba(45, 74, 45, 0.35);
+  border-radius: 50%;
+  animation: footer-marker-pulse 2s ease-out infinite;
+}
+@keyframes footer-marker-bounce {
+  0%, 100% { transform: rotate(-45deg) translateY(0); }
+  50% { transform: rotate(-45deg) translateY(-10px); }
+}
+@keyframes footer-marker-pulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}

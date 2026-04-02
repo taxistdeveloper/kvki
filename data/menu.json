@@ -1,0 +1,182 @@
+{
+    "menu": [
+        {
+            "title": "О нас",
+            "url": "#",
+            "children": [
+                {
+                    "title": "Блог директора",
+                    "slug": "blog-direktora"
+                },
+                {
+                    "title": "История колледжа",
+                    "slug": "istoriya-kolledzha"
+                },
+                {
+                    "title": "Методическая работа",
+                    "slug": "metodicheskaya-rabota"
+                },
+                {
+                    "title": "Воспитательная работа",
+                    "url": "#",
+                    "children": [
+                        {
+                            "title": "Цель и направление",
+                            "slug": "tsel-i-napravlenie"
+                        },
+                        {
+                            "title": "Поликлиника",
+                            "url": "#"
+                        },
+                        {
+                            "title": "СПП",
+                            "url": "#"
+                        },
+                        {
+                            "title": "Социально-психологическая служба",
+                            "url": "#"
+                        },
+                        {
+                            "title": "План воспитательной работы",
+                            "url": "#"
+                        },
+                        {
+                            "title": "План воспитательной работы общежития",
+                            "url": "#"
+                        },
+                        {
+                            "title": "План воспитательной работы общежития",
+                            "url": "#"
+                        },
+                        {
+                            "title": "План работы по профилактики булинга",
+                            "url": "#"
+                        }
+                    ]
+                },
+                {
+                    "title": "Производственная работа",
+                    "url": "#",
+                    "children": [
+                        {
+                            "title": "Трудоустройства",
+                            "slug": "trudoustroystva"
+                        },
+                        {
+                            "title": "Социальные партнеры",
+                            "slug": "sotsialnye-partnery"
+                        }
+                    ]
+                },
+                {
+                    "title": "Отделения",
+                    "url": "#",
+                    "children": [
+                        {
+                            "title": "Строительное техническое отделение",
+                            "slug": "stroitelnoe-tekhnicheskoe-otdelenie"
+                        },
+                        {
+                            "title": "Архитектуры, дизайна и декоративно-прикладного искусства",
+                            "slug": "arkhitektury-dizayna-i-dekorativno-prikladnogo-iskusstva"
+                        },
+                        {
+                            "title": "Профессионально-технические",
+                            "slug": "professionalno-tekhnicheskie"
+                        },
+                        {
+                            "title": "Проектирования и реставрации",
+                            "slug": "__manual__"
+                        }
+                    ]
+                },
+                {
+                    "title": "Гос услуги",
+                    "url": "#",
+                    "children": [
+                        {
+                            "title": "Государственные символы",
+                            "slug": "gosudarstvennye-simvoly"
+                        },
+                        {
+                            "title": "Перечень государственных услуг",
+                            "slug": "perechen-gosudarstvennykh-uslug"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Поступление",
+            "url": "#",
+            "children": [
+                {
+                    "title": "Правила приёма",
+                    "slug": "pravila-priema"
+                },
+                {
+                    "title": "Специальности",
+                    "slug": "spetsialnosti"
+                },
+                {
+                    "title": "Как подать документы на поступление в колледж онлайн?",
+                    "slug": "kak-podat-dokumenty-na-postuplenie-v-kolledzh-onlayn"
+                },
+                {
+                    "title": "Как поступить в колледж абитуриенту",
+                    "slug": "kak-postupit-v-kolledzh-abiturientu"
+                }
+            ]
+        },
+        {
+            "title": "Студентам",
+            "url": "#",
+            "children": [
+                {
+                    "title": "Кружки и клубы",
+                    "slug": "kruzhki-i-kluby"
+                },
+                {
+                    "title": "Общежитие",
+                    "slug": "obschezhitie"
+                },
+                {
+                    "title": "Центр обслуживания студентов",
+                    "slug": "tsentr-obsluzhivaniya-studentov"
+                }
+            ]
+        },
+        {
+            "title": "Медиацентр",
+            "url": "#",
+            "children": [
+                {
+                    "title": "Видео",
+                    "slug": "video"
+                },
+                {
+                    "title": "WorldSkills",
+                    "slug": "worldskills"
+                },
+                {
+                    "title": "Новости",
+                    "slug": "novosti"
+                }
+            ]
+        },
+        {
+            "title": "Противодействие коррупции",
+            "url": "#",
+            "children": [
+                {
+                    "title": "Антикоррупционный комплекс",
+                    "slug": "antikorruptsionnyy-kompleks"
+                },
+                {
+                    "title": "Картограмма коррупции",
+                    "slug": "kartogramma-korruptsii"
+                }
+            ]
+        }
+    ]
+}

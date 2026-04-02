@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /kvki/
+
+# Страница 500 при фатальных ошибках PHP
+ErrorDocument 500 /kvki/500.php
+
+# Админ-панель: все запросы /admin и /admin/* → admin/index.php (кроме install.php)
+RewriteCond %{REQUEST_URI} !admin/install\.php [NC]
+RewriteRule ^admin(/.*)?$ admin/index.php [QSA,L]
+
+# Если запрашивается существующий файл или директория - не перезаписывать
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Перенаправлять все остальные запросы на index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
