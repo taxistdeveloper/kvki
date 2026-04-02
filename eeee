@@ -1,0 +1,16 @@
+Уже сделано у вас на диске
+git init -b main — репозиторий в C:\MAMP\htdocs\kvki, ветка main.
+git add -A и git commit — первый коммит со всеми файлами.
+git remote add origin https://github.com/taxistdeveloper/kvki.git — привязка к репозиторию на GitHub.
+git push -u origin main — код отправлен на GitHub; ветка main отслеживает origin/main.
+Репозиторий больше не пустой: код должен быть виден на странице проекта.
+
+Дальнейшие изменения (каждый раз)
+cd C:\MAMP\htdocs\kvki
+git add .
+git commit -m "Краткое описание изменений"
+git push
+Безопасность
+В репозитории есть config/database.php с логином/паролем к MySQL (root/root). Для публичного репозитория лучше не хранить реальные пароли в Git: вынести секреты в локальный файл (и добавить его в .gitignore) или использовать переменные окружения на сервере и оставить в репозитории только пример без паролей.
+
+Если нужно, могу предложить конкретную схему с database.example.php и .gitignore под ваш проект.
