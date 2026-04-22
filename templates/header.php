@@ -12,7 +12,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2d4a2d">
+    <meta name="theme-color" content="#1f59b0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="mobile-web-app-capable" content="yes">
@@ -25,26 +25,36 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                 extend: {
                     colors: {
                         cream: {
-                            50: '#fefdfb',
-                            100: '#faf8f5',
-                            200: '#f5f1eb'
+                            50: '#f5f5f5',
+                            100: '#f5f5f5',
+                            200: '#f5f5f5'
                         },
                         sage: {
-                            400: '#6b8e6b',
-                            500: '#5a7d5a',
-                            600: '#4a6d4a',
-                            700: '#3d5c3d',
-                            800: '#2d4a2d',
-                            900: '#1e3320'
+                            400: '#1f59b0',
+                            500: '#1f59b0',
+                            600: '#1f59b0',
+                            700: '#1f59b0',
+                            800: '#1f59b0',
+                            900: '#1f59b0'
+                        },
+                        edu: {
+                            50: '#1f59b0',
+                            100: '#1f59b0',
+                            200: '#1f59b0',
+                            400: '#1f59b0',
+                            500: '#1f59b0',
+                            600: '#1f59b0',
+                            700: '#1f59b0',
+                            800: '#1f59b0'
                         },
                         ink: {
-                            600: '#4a5568',
-                            700: '#2d3748',
-                            800: '#1a202c'
+                            600: '#516272',
+                            700: '#3a4b5a',
+                            800: '#263544'
                         }
                     },
                     fontFamily: {
-                        sans: ['Nunito', 'system-ui', 'sans-serif']
+                        sans: ['Montserrat', 'system-ui', 'sans-serif']
                     }
                 }
             }
@@ -52,7 +62,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css?v=<?= filemtime(ROOT_PATH . '/assets/css/style.css') ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">

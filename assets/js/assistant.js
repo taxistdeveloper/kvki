@@ -11,15 +11,15 @@
         const id = 'kvki-m' + Math.random().toString(36).slice(2, 9);
         return `<svg class="kvki-mascot" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
-                <linearGradient id="${id}-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#5a7d5a"/><stop offset="100%" style="stop-color:#3d5c3d"/></linearGradient>
-                <linearGradient id="${id}-face" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fefdfb"/><stop offset="100%" style="stop-color:#f5f1eb"/></linearGradient>
+                <linearGradient id="${id}-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1f59b0"/><stop offset="100%" style="stop-color:#1f59b0"/></linearGradient>
+                <linearGradient id="${id}-face" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#f5f5f5"/><stop offset="100%" style="stop-color:#f5f5f5"/></linearGradient>
             </defs>
             <circle cx="32" cy="32" r="30" fill="url(#${id}-bg)"/>
             <circle cx="32" cy="32" r="24" fill="url(#${id}-face)"/>
-            <circle cx="26" cy="28" r="3" fill="#4a6d4a"/>
-            <circle cx="38" cy="28" r="3" fill="#4a6d4a"/>
-            <path d="M24 38 Q32 44 40 38" stroke="#4a6d4a" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M18 16 L22 12 L26 16 L32 10 L38 16 L42 12 L46 16" stroke="#4a6d4a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="26" cy="28" r="3" fill="#1f59b0"/>
+            <circle cx="38" cy="28" r="3" fill="#1f59b0"/>
+            <path d="M24 38 Q32 44 40 38" stroke="#1f59b0" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M18 16 L22 12 L26 16 L32 10 L38 16 L42 12 L46 16" stroke="#1f59b0" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>`;
     }
 

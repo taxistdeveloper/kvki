@@ -15,8 +15,10 @@ $footerYandexUrl = $fs['footer_yandex_url'] ?? 'https://yandex.ru/maps/?pt=73.08
 $footerBottomLinks = FooterSettings::getLinks('footer_bottom_links');
 $footerLinkClass = 'group inline-flex items-center gap-2 py-1.5 text-base text-cream-100/90 hover:text-cream-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cream-100/30 focus:ring-offset-2 focus:ring-offset-sage-800 rounded';
 $footerChevron = '<svg class="w-3.5 h-3.5 text-cream-100/50 group-hover:text-cream-100/80 group-hover:translate-x-0.5 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
+$footerCardLinkClass = 'group inline-flex items-center gap-2 py-1.5 text-base text-black hover:text-black/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/20 focus:ring-offset-2 focus:ring-offset-white rounded';
+$footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-black/70 group-hover:translate-x-0.5 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
 ?>
-    <footer class="mt-auto bg-sage-800 text-cream-100" role="contentinfo">
+    <footer class="mt-auto text-cream-100" style="background-color: #253f50;" role="contentinfo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
                 <!-- Колонка 1: Логотип и контакты -->
@@ -82,22 +84,22 @@ $footerChevron = '<svg class="w-3.5 h-3.5 text-cream-100/50 group-hover:text-cre
 
                 <!-- Колонка 4: Антикоррупционный комплекс -->
                 <div class="lg:col-span-2">
-                    <div class="bg-sage-700/60 rounded-2xl p-7 lg:p-8 shadow-xl border border-cream-100/5 hover:border-cream-100/10 transition-colors duration-300 w-full min-w-0">
+                    <div class="bg-white rounded-2xl p-7 lg:p-8 shadow-soft border border-sage-200 hover:border-sage-300 transition-colors duration-300 w-full min-w-0">
                         <div class="flex justify-center mb-4">
-                            <div class="w-16 h-16 rounded-2xl bg-cream-100/10 flex items-center justify-center">
-                                <svg class="w-9 h-9 text-cream-100/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            <div class="w-16 h-16 rounded-2xl bg-sage-600/10 flex items-center justify-center">
+                                <svg class="w-9 h-9 text-sage-600/85" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                             </div>
                         </div>
-                        <h4 class="font-semibold text-cream-100 text-center mb-5 text-lg"><?= htmlspecialchars($footerAnticorTitle) ?></h4>
+                        <h4 class="font-semibold text-black text-center mb-5 text-lg"><?= htmlspecialchars($footerAnticorTitle) ?></h4>
                         <ul class="space-y-2 mb-5">
                             <?php foreach ($footerAnticorLinks as $link): ?>
-                            <li><a href="<?= BASE_URL ?><?= htmlspecialchars(strpos($link['url'], '/') === 0 ? $link['url'] : '/' . $link['url']) ?>" class="<?= $footerLinkClass ?>"><?= $footerChevron ?><?= htmlspecialchars($link['title']) ?></a></li>
+                            <li><a href="<?= BASE_URL ?><?= htmlspecialchars(strpos($link['url'], '/') === 0 ? $link['url'] : '/' . $link['url']) ?>" class="<?= $footerCardLinkClass ?>"><?= $footerCardChevron ?><?= htmlspecialchars($link['title']) ?></a></li>
                             <?php endforeach; ?>
                         </ul>
-                        <div class="text-center pt-5 border-t border-cream-100/10">
-                            <p class="text-sm text-cream-100/80 mb-2">Горячая линия по борьбе с коррупцией</p>
-                            <a href="tel:<?= htmlspecialchars(preg_replace('/\D/', '', $footerHotline)) ?>" class="inline-block text-2xl font-bold text-red-400 hover:text-red-300 transition-colors focus:outline-none focus:ring-2 focus:ring-red-400/50 focus:ring-offset-2 focus:ring-offset-sage-800 rounded px-2 py-1"><?= htmlspecialchars($footerHotline) ?></a>
-                            <p class="text-sm text-cream-100/60 mt-2">Звонок по всему Казахстану бесплатный</p>
+                        <div class="text-center pt-5 border-t border-sage-200">
+                            <p class="text-sm text-black/80 mb-2">Горячая линия по борьбе с коррупцией</p>
+                            <a href="tel:<?= htmlspecialchars(preg_replace('/\D/', '', $footerHotline)) ?>" class="inline-block text-2xl font-bold text-red-500 hover:text-red-400 transition-colors focus:outline-none focus:ring-2 focus:ring-red-400/50 focus:ring-offset-2 focus:ring-offset-white rounded px-2 py-1"><?= htmlspecialchars($footerHotline) ?></a>
+                            <p class="text-sm text-black/70 mt-2">Звонок по всему Казахстану бесплатный</p>
                         </div>
                     </div>
                 </div>
@@ -217,6 +219,30 @@ $footerChevron = '<svg class="w-3.5 h-3.5 text-cream-100/50 group-hover:text-cre
             }
         })();
         (function() {
+            const partnersSwiperEl = document.querySelector('.partners-swiper');
+            if (partnersSwiperEl) {
+                const slidesCount = partnersSwiperEl.querySelectorAll('.swiper-slide').length;
+                new Swiper('.partners-swiper', {
+                    loop: slidesCount > 4,
+                    speed: 7000,
+                    allowTouchMove: false,
+                    autoplay: {
+                        delay: 1,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: false,
+                    },
+                    watchOverflow: true,
+                    spaceBetween: 20,
+                    slidesPerView: 1.2,
+                    breakpoints: {
+                        640: { slidesPerView: 2, spaceBetween: 20 },
+                        1024: { slidesPerView: 3, spaceBetween: 20 },
+                        1280: { slidesPerView: 4, spaceBetween: 20 },
+                    },
+                });
+            }
+        })();
+        (function() {
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const overlay = document.getElementById('mobile-menu-overlay');
@@ -320,5 +346,128 @@ $footerChevron = '<svg class="w-3.5 h-3.5 text-cream-100/50 group-hover:text-cre
                 })
             }).addTo(map);
             marker.bindPopup('<strong>КВКИ</strong><br>ул. Кирпичная 8, г. Караганда');
+        })();
+        (function() {
+            const showMoreBtn = document.getElementById('instagram-show-more');
+            if (!showMoreBtn) return;
+            const hiddenItems = document.querySelectorAll('.js-instagram-item[style*="display:none"]');
+            if (!hiddenItems.length) return;
+            const viewAllLink = document.getElementById('instagram-view-all-link');
+
+            showMoreBtn.addEventListener('click', function() {
+                hiddenItems.forEach(item => {
+                    item.style.display = '';
+                });
+                showMoreBtn.style.display = 'none';
+                if (viewAllLink) {
+                    viewAllLink.style.display = 'inline-flex';
+                }
+            }, { once: true });
+        })();
+        (function() {
+            const modal = document.getElementById('instagram-post-modal');
+            if (!modal) return;
+            const modalContent = document.getElementById('instagram-modal-content');
+            const modalLink = document.getElementById('instagram-modal-link');
+            const openCards = document.querySelectorAll('.js-instagram-open');
+            const closeBtns = modal.querySelectorAll('[data-instagram-modal-close]');
+            const body = document.body;
+
+            function buildEmbedUrl(postUrl) {
+                try {
+                    const url = new URL(postUrl);
+                    const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+                    return `${url.origin}${pathname}embed/captioned/`;
+                } catch (e) {
+                    return '';
+                }
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.setAttribute('aria-hidden', 'true');
+                modalContent.innerHTML = '';
+                body.style.overflow = '';
+            }
+
+            function openModal(payload) {
+                const type = payload.postType || 'embed';
+                const caption = payload.postCaption || '';
+                const postUrl = payload.postUrl || '';
+                const postImage = payload.postImage || '';
+
+                if (type === 'demo') {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'space-y-4';
+
+                    if (postImage) {
+                        const image = document.createElement('img');
+                        image.src = postImage;
+                        image.alt = 'Пост Instagram';
+                        image.className = 'w-full rounded-2xl object-cover max-h-[70vh]';
+                        wrapper.appendChild(image);
+                    }
+
+                    if (caption) {
+                        const text = document.createElement('p');
+                        text.className = 'text-ink-700 leading-relaxed whitespace-pre-line';
+                        text.textContent = caption;
+                        wrapper.appendChild(text);
+                    }
+                    modalContent.innerHTML = '';
+                    modalContent.appendChild(wrapper);
+                } else {
+                    const embedUrl = buildEmbedUrl(postUrl);
+                    modalContent.innerHTML = '';
+                    if (embedUrl) {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'w-full';
+                        const iframe = document.createElement('iframe');
+                        iframe.src = embedUrl;
+                        iframe.className = 'w-full rounded-2xl border border-black/10';
+                        iframe.style.minHeight = '720px';
+                        iframe.loading = 'lazy';
+                        iframe.setAttribute('allowfullscreen', '');
+                        wrapper.appendChild(iframe);
+
+                        if (caption) {
+                            const text = document.createElement('p');
+                            text.className = 'text-ink-600 text-sm mt-3';
+                            text.textContent = caption;
+                            wrapper.appendChild(text);
+                        }
+                        modalContent.appendChild(wrapper);
+                    } else {
+                        const text = document.createElement('p');
+                        text.className = 'text-ink-600';
+                        text.textContent = 'Не удалось открыть публикацию в модальном окне.';
+                        modalContent.appendChild(text);
+                    }
+                }
+
+                if (modalLink) {
+                    modalLink.href = postUrl || modalLink.href;
+                }
+                modal.classList.remove('hidden');
+                modal.setAttribute('aria-hidden', 'false');
+                body.style.overflow = 'hidden';
+            }
+
+            openCards.forEach(card => {
+                card.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    openModal(this.dataset);
+                });
+            });
+
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
         })();
     </script>

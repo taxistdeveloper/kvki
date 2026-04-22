@@ -14,7 +14,7 @@ $is500 = ($errorCode === 500);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2d4a2d">
+    <meta name="theme-color" content="#1f59b0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <title><?= (int)$errorCode ?> — <?= htmlspecialchars($errorTitle) ?> — <?= SITE_NAME ?? 'КВКИ' ?></title>
@@ -25,22 +25,23 @@ $is500 = ($errorCode === 500);
             theme: {
                 extend: {
                     colors: {
-                        cream: { 50: '#fefdfb', 100: '#faf8f5', 200: '#f5f1eb' },
-                        sage: { 400: '#6b8e6b', 500: '#5a7d5a', 600: '#4a6d4a', 700: '#3d5c3d', 800: '#2d4a2d', 900: '#1e3320' },
-                        ink: { 600: '#4a5568', 700: '#2d3748', 800: '#1a202c' }
+                        cream: { 50: '#f5f5f5', 100: '#f5f5f5', 200: '#f5f5f5' },
+                        sage: { 400: '#1f59b0', 500: '#1f59b0', 600: '#1f59b0', 700: '#1f59b0', 800: '#1f59b0', 900: '#1f59b0' },
+                        edu: { 50: '#1f59b0', 100: '#1f59b0', 200: '#1f59b0', 400: '#1f59b0', 500: '#1f59b0', 600: '#1f59b0', 700: '#1f59b0', 800: '#1f59b0' },
+                        ink: { 600: '#516272', 700: '#3a4b5a', 800: '#263544' }
                     },
-                    fontFamily: { sans: ['Nunito', 'system-ui', 'sans-serif'] }
+                    fontFamily: { sans: ['Montserrat', 'system-ui', 'sans-serif'] }
                 }
             }
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?? '/kvki' ?>/assets/css/style.css?v=<?= defined('ROOT_PATH') && file_exists(ROOT_PATH . '/assets/css/style.css') ? filemtime(ROOT_PATH . '/assets/css/style.css') : time() ?>">
     <style>
         .error-code { font-size: clamp(6rem, 18vw, 12rem); line-height: 1; letter-spacing: -0.04em; }
-        .error-illustration { filter: drop-shadow(0 4px 24px rgba(74, 109, 74, 0.15)); }
+        .error-illustration { filter: drop-shadow(0 4px 24px rgba(31, 89, 176, 0.18)); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .animate-float { animation: float 4s ease-in-out infinite; }
         @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }

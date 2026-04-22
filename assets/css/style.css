@@ -45,11 +45,11 @@
   z-index: 2;
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #2d4a2d 0%, #3d5c3d 100%);
+  background: linear-gradient(135deg, #1f59b0 0%, #1f59b0 100%);
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  border: 3px solid #faf8f5;
+  box-shadow: var(--shadow-soft);
+  border: 3px solid #f5f5f5;
   animation: footer-marker-bounce 2s ease-in-out infinite;
 }
 .footer-map-marker-pulse {
@@ -57,7 +57,7 @@
   z-index: 1;
   width: 32px;
   height: 32px;
-  background: rgba(45, 74, 45, 0.35);
+  background: rgba(31, 89, 176, 0.22);
   border-radius: 50%;
   animation: footer-marker-pulse 2s ease-out infinite;
 }

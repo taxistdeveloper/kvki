@@ -20,16 +20,17 @@ $siteName = defined('SITE_NAME') ? SITE_NAME : 'КВКИ';
             theme: {
                 extend: {
                     colors: {
-                        cream: { 100: '#faf8f5', 50: '#fefdfb' },
-                        sage: { 500: '#5a7d5a', 600: '#4a6d4a', 700: '#3d5c3d' },
-                        ink: { 600: '#4a5568', 800: '#1a202c' }
+                        cream: { 100: '#f5f5f5', 50: '#f5f5f5' },
+                        sage: { 500: '#1f59b0', 600: '#1f59b0', 700: '#1f59b0' },
+                        edu: { 100: '#1f59b0', 200: '#1f59b0', 500: '#1f59b0', 600: '#1f59b0', 700: '#1f59b0' },
+                        ink: { 600: '#516272', 800: '#263544' }
                     },
-                    fontFamily: { sans: ['Nunito', 'system-ui', 'sans-serif'] }
+                    fontFamily: { sans: ['Montserrat', 'system-ui', 'sans-serif'] }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="font-sans antialiased bg-cream-100 text-ink-800 min-h-screen flex items-center justify-center px-4">
     <div class="max-w-lg w-full text-center">

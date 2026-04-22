@@ -6,7 +6,7 @@
  */
 
 define('ROOT_PATH', dirname(__DIR__));
-define('BASE_URL', '/kvki');
+define('BASE_URL', '/kvki_redesign');
 define('SITE_NAME', 'КГКП Карагандинский высший колледж инжиниринга');
 define('SITE_DESCRIPTION', 'Образовательное учреждение технического профиля');
 
