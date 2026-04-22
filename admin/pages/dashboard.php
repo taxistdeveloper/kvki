@@ -44,22 +44,18 @@ $dashboardCards = [
         <p class="text-ink-500 text-sm mt-1">Обзор контента и быстрый доступ к разделам</p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <?php foreach ($dashboardCards as $card): ?>
-        <a href="<?= ADMIN_URL ?>/<?= $card['href'] ?>" class="group admin-card p-5 shadow-md hover:border-sage-300 hover:shadow-lg transition-all duration-200">
+        <a href="<?= ADMIN_URL ?>/<?= $card['href'] ?>" class="group block min-h-[132px] p-6 rounded-[28px] bg-white border border-black/5 shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300">
             <div class="flex items-start justify-between">
                 <div class="flex-1 min-w-0">
-                    <p class="text-2xl font-bold text-sage-600 group-hover:text-sage-700"><?= (int)$counts[$card['key']] ?></p>
-                    <p class="text-sm font-medium text-ink-600 mt-1"><?= htmlspecialchars($card['label']) ?></p>
+                    <p class="text-4xl leading-none font-bold text-ink-800"><?= (int)$counts[$card['key']] ?></p>
+                    <p class="text-lg font-semibold text-ink-700 mt-2"><?= htmlspecialchars($card['label']) ?></p>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-sage-100 text-sage-600 flex items-center justify-center flex-shrink-0 group-hover:bg-sage-200 group-hover:text-sage-700 transition-colors">
+                <div class="w-12 h-12 rounded-2xl bg-sage-600/10 text-sage-600 flex items-center justify-center flex-shrink-0 group-hover:bg-sage-600/15 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<?= $card['icon'] ?>"/></svg>
                 </div>
             </div>
-            <span class="inline-flex items-center gap-1 mt-3 text-xs font-medium text-sage-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                Открыть
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </span>
         </a>
         <?php endforeach; ?>
     </div>

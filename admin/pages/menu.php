@@ -289,7 +289,7 @@ function renderMenuTree(array $items, array $pages): string
     </div>
 
     <form method="post">
-        <div class="rounded-2xl border border-cream-200 bg-white shadow-lg shadow-ink-900/5 overflow-hidden">
+        <div class="rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
             <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white flex items-center justify-between flex-wrap gap-2">
                 <div>
                     <span class="font-semibold text-ink-800 block">Пункты меню</span>

@@ -87,7 +87,7 @@ $showForm = $item || ($segments[1] ?? '') === 'new' || $formError;
 
 <?php if ($showForm): ?>
     <?php $item = $item ?? ['name' => '', 'url' => '#', 'image_url' => '']; ?>
-    <div class="mb-8 rounded-2xl border border-cream-200 bg-white shadow-lg shadow-ink-900/5 overflow-hidden">
+    <div class="mb-8 rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
         <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white">
             <h2 class="text-lg font-semibold text-ink-800"><?= $editId ? 'Редактировать партнёра' : 'Новый партнёр' ?></h2>
         </div>
@@ -147,7 +147,7 @@ $showForm = $item || ($segments[1] ?? '') === 'new' || $formError;
     </div>
 <?php endif; ?>
 
-    <div class="rounded-2xl border border-cream-200 bg-white shadow-lg shadow-ink-900/5 overflow-hidden">
+    <div class="rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
         <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white flex items-center justify-between flex-wrap gap-2">
             <span class="font-semibold text-ink-800">Список партнёров</span>
             <a href="<?= ADMIN_URL ?>/partners/new" class="inline-flex items-center gap-2 px-4 py-2.5 bg-sage-600 text-white text-sm font-medium rounded-xl hover:bg-sage-700 shadow-md shadow-sage-600/25 transition-all">

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
                     colors: {
                         cream: { 50: '#fefdfb', 100: '#faf8f5', 200: '#f5f1eb' },
-                        sage: { 500: '#5a7d5a', 600: '#4a6d4a', 700: '#3d5c3d', 800: '#2d4a2d' },
+                        sage: { 500: '#3b6275', 600: '#253f50', 700: '#1f3543', 800: '#1a2c38' },
                         ink: { 600: '#475569', 700: '#334155', 800: '#1e293b' }
                     }
                 }

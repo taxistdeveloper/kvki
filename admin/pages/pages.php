@@ -124,7 +124,7 @@ $showForm = $page || $isNew || !empty($formError);
 
 <?php if ($showForm): ?>
     <?php $page = $page ?? ['slug' => $postSlug ?? $loadSlug ?? '', 'title' => $postTitle ?? '', 'content' => $postContent ?? '', 'meta_description' => $postMeta ?? '', 'is_active' => $postActive ?? 1]; ?>
-    <div class="mb-8 rounded-2xl border border-cream-200 bg-white shadow-lg shadow-ink-900/5 overflow-hidden">
+    <div class="mb-8 rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
         <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white">
             <h2 class="text-lg font-semibold text-ink-800"><?= $editId ? 'Редактировать страницу' : 'Новая страница' ?></h2>
         </div>
@@ -218,7 +218,7 @@ $showForm = $page || $isNew || !empty($formError);
     </div>
 <?php endif; ?>
 
-    <div class="rounded-2xl border border-cream-200 bg-white shadow-lg shadow-ink-900/5 overflow-hidden">
+    <div class="rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
         <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white flex items-center justify-between flex-wrap gap-2">
             <span class="font-semibold text-ink-800">Список страниц</span>
             <a href="<?= ADMIN_URL ?>/pages/new" class="inline-flex items-center gap-2 px-4 py-2.5 bg-sage-600 text-white text-sm font-medium rounded-xl hover:bg-sage-700 shadow-md shadow-sage-600/25 transition-all">
@@ -296,8 +296,8 @@ $showForm = $page || $isNew || !empty($formError);
 #editor-container .ql-editor h3 { font-size: 1.125rem; font-weight: 700; margin: 0.5rem 0; color: #475569; }
 #editor-container .ql-editor p { margin-bottom: 0.75rem; line-height: 1.65; }
 #editor-container .ql-editor ul, #editor-container .ql-editor ol { margin: 0.5rem 0 0.75rem 1.5rem; }
-#editor-container .ql-editor a { color: #4a6d4a; text-decoration: underline; }
-#editor-container .ql-editor a:hover { color: #3d5c3d; }
+#editor-container .ql-editor a { color: #253f50; text-decoration: underline; }
+#editor-container .ql-editor a:hover { color: #1f3543; }
 #editor-visual-wrap, #editor-code-wrap { transition: opacity 0.2s ease; }
 #btn-mode-visual, #btn-mode-code { transition: background-color 0.15s, color 0.15s; }
 #editor-code-wrap { min-height: 360px; }
