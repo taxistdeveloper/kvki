@@ -4,7 +4,7 @@
 .kvki-assistant {
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     z-index: 9999;
     font-family: 'Nunito', system-ui, sans-serif;
 }
@@ -17,7 +17,7 @@
 .kvki-assistant-toggle {
     position: absolute;
     bottom: 1rem;
-    right: 1rem;
+    left: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -29,19 +29,62 @@
     box-shadow: var(--shadow-soft), 0 0 0 3px rgba(255, 255, 255, 0.15);
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: kvki-assistant-breathe 3.2s ease-in-out infinite;
+    isolation: isolate;
+    z-index: 1;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.02em;
 }
 
+.kvki-assistant-toggle::before {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    border-radius: inherit;
+    background: radial-gradient(circle at center, rgba(77, 154, 255, 0.56) 0%, rgba(77, 154, 255, 0.24) 46%, rgba(77, 154, 255, 0) 74%);
+    filter: blur(8px);
+    opacity: 0.42;
+    z-index: -1;
+    pointer-events: none;
+    animation: kvki-assistant-glow 3.2s ease-in-out infinite;
+}
+
 .kvki-assistant-toggle:hover {
     transform: scale(1.05);
     box-shadow: var(--shadow-float), 0 0 0 3px rgba(255, 255, 255, 0.2);
+    animation-play-state: paused;
+}
+
+.kvki-assistant-toggle:hover::before {
+    opacity: 0.62;
 }
 
 .kvki-assistant-toggle:focus {
     outline: 2px solid #1f59b0;
     outline-offset: 2px;
+}
+
+@keyframes kvki-assistant-breathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-soft), 0 0 0 3px rgba(255, 255, 255, 0.15);
+    }
+    50% {
+        transform: scale(1.035);
+        box-shadow: var(--shadow-float), 0 0 0 4px rgba(255, 255, 255, 0.22);
+    }
+}
+
+@keyframes kvki-assistant-glow {
+    0%, 100% {
+        opacity: 0.36;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 0.62;
+        transform: scale(1.04);
+    }
 }
 
 .kvki-assistant-toggle-avatar {
@@ -72,7 +115,7 @@
 .kvki-assistant-panel {
     position: absolute;
     bottom: 4rem;
-    right: 1rem;
+    left: 1rem;
     width: min(380px, calc(100vw - 2rem));
     max-height: min(520px, calc(100vh - 6rem));
     background: #f5f5f5;
@@ -341,5 +384,15 @@
         left: 0.5rem;
         width: auto;
         bottom: 5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kvki-assistant-toggle {
+        animation: none;
+    }
+
+    .kvki-assistant-toggle::before {
+        animation: none;
     }
 }

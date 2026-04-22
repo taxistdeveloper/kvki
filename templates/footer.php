@@ -25,7 +25,7 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
                 <div class="sm:col-span-2 lg:col-span-1">
                     <a href="<?= BASE_URL ?>/" class="inline-flex items-center gap-4 mb-6 group">
                         <div class="flex items-center justify-center rounded-2xl overflow-hidden bg-cream-100/10 p-1.5 shadow-inner group-hover:bg-cream-100/15 transition-colors duration-300 min-w-[48px] min-h-[48px]">
-                            <?php $footerLogoFile = file_exists(ROOT_PATH . '/assets/images/logo/logo-50.png') ? 'logo-50.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo-50.svg') ? 'logo-50.svg' : null); ?>
+                            <?php $footerLogoFile = file_exists(ROOT_PATH . '/assets/images/logo/logo-white.png') ? 'logo-white.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo-white') ? 'logo-white.png' : null); ?>
                             <?php if ($footerLogoFile): ?>
                                 <img src="<?= BASE_URL ?>/assets/images/logo/<?= $footerLogoFile ?>" alt="<?= htmlspecialchars($hs['logo_title'] ?? 'Карагандинский высший колледж инжиниринга') ?>" class="h-12 w-auto object-contain group-hover:scale-[1.02] transition-transform duration-300">
                             <?php else: ?>

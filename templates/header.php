@@ -184,7 +184,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                 <span class="h-12 lg:h-14 flex items-center justify-center px-3 font-bold text-sage-700 text-lg lg:text-xl" aria-label="<?= htmlspecialchars($hs['logo_abbr'] ?? 'КВКИ') ?>"><?= htmlspecialchars($hs['logo_abbr'] ?? 'КВКИ') ?></span>
                             <?php endif; ?>
                         </div>
-                        <?php $logo2File = file_exists(ROOT_PATH . '/assets/images/logo/logo-ministry.png') ? 'logo-ministry.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo-ministry.svg') ? 'logo-ministry.svg' : null); ?>
+                        <?php $logo2File = file_exists(ROOT_PATH . '/assets/images/logo/logo.png') ? 'logo.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo.') ? 'logo.png' : null); ?>
                         <?php if ($logo2File): ?>
                             <div class="flex items-center justify-center rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 ring-1 ring-cream-200/60 p-0.5 min-w-[48px] min-h-[48px] lg:min-w-[56px] lg:min-h-[56px]">
                                 <img src="<?= BASE_URL ?>/assets/images/logo/<?= $logo2File ?>" alt="МОН РК" class="h-12 lg:h-14 w-auto object-contain group-hover:scale-[1.02] transition-transform duration-300 rounded-xl">

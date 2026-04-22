@@ -60,7 +60,7 @@ require ROOT_PATH . '/templates/header.php';
         <!-- Карточки приложений: 2 колонки на мобильных (как иконки приложений), 4 на десктопе -->
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 e-resource-grid">
             <?php foreach ($apps as $app): ?>
-            <div class="e-resource-card p-4 sm:p-6 rounded-2xl bg-cream-50 border border-cream-200 hover:border-sage-400 hover:shadow-lg transition-all group flex flex-col">
+            <div class="e-resource-card p-4 sm:p-6 transition-all group flex flex-col">
                 <div class="flex items-start justify-between gap-2 mb-1 sm:mb-2 min-h-[2.25rem]">
                     <h3 class="font-bold text-ink-800 text-sm sm:text-lg group-hover:text-sage-700 transition-colors leading-tight line-clamp-2"><?= htmlspecialchars($app['name']) ?></h3>
                     <?php if ($app['tag']): ?>
