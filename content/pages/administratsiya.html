@@ -1,0 +1,167 @@
+<div class="administratsiya-page not-prose">
+  <!-- Hero -->
+  <div class="relative overflow-hidden rounded-2xl bg-white border border-cream-200 shadow-[0_10px_24px_rgba(15,23,42,0.08)] p-8 lg:p-10 mb-10">
+    <div class="relative z-10">
+      <h1 class="text-3xl lg:text-4xl font-extrabold text-ink-800 tracking-tight mb-3">Администрация</h1>
+      <p class="text-ink-600 text-lg max-w-2xl leading-relaxed">
+        Администрация колледжа является основным структурным подразделением, обеспечивающим эффективное функционирование учебного заведения.
+      </p>
+    </div>
+    <div class="absolute top-0 right-0 w-72 h-72 bg-sage-400/5 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+  </div>
+
+  <!-- Карточка администратора -->
+  <section class="mb-12">
+    <div class="rounded-2xl bg-white border border-cream-200 shadow-[0_12px_30px_rgba(15,23,42,0.08)] overflow-hidden">
+      <div class="grid md:grid-cols-[300px_1fr] lg:grid-cols-[340px_1fr]">
+        <div class="bg-cream-100/70 p-6 sm:p-8 md:p-10 flex items-center justify-center">
+          <div class="w-full max-w-[240px] aspect-[3/4] rounded-2xl overflow-hidden border border-cream-200 shadow-[0_10px_24px_rgba(15,23,42,0.12)] bg-white">
+            <img
+              src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900"
+              alt="Алиева Айгуль"
+              class="w-full h-full object-cover"
+              onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="w-full h-full bg-gradient-to-br from-sage-500/20 via-cream-50 to-sage-500/10 items-center justify-center" style="display:none;">
+              <span class="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-white border border-cream-200 text-sage-700 text-3xl font-extrabold tracking-wide">АА</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 lg:p-10">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-sage-500/15 text-sage-700 text-sm font-semibold mb-4">
+            Администрация колледжа
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-ink-800 tracking-tight leading-tight mb-3">
+            Алиева Айгуль
+          </h2>
+          <p class="text-xl sm:text-2xl font-semibold text-sage-700 mb-3">
+            <span class="relative inline-block pb-1">
+              Заместитель директора
+              <span class="absolute left-0 -bottom-0.5 w-full h-[3px] rounded-full bg-gradient-to-r from-sage-500 via-sage-600 to-sage-500/40" aria-hidden="true"></span>
+            </span>
+          </p>
+          <p class="text-lg text-ink-700 leading-relaxed mb-8">
+            Учебно-методическая работа
+          </p>
+
+          <button
+            type="button"
+            data-open-admin-modal
+            class="inline-flex items-center justify-center gap-2.5 min-h-[52px] px-7 py-3 rounded-xl bg-sage-600 text-white text-base sm:text-lg font-semibold hover:bg-sage-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2"
+          >
+            Подробная информация о сотруднике
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Модальное окно -->
+  <div id="admin-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title" aria-hidden="true">
+    <div class="fixed inset-0 bg-ink-900/65 backdrop-blur-sm" data-close-admin-modal></div>
+
+    <div id="admin-modal-backdrop" class="fixed inset-0 p-3 sm:p-4 overflow-y-auto flex items-start sm:items-center justify-center">
+      <div class="relative w-full max-w-2xl bg-white rounded-2xl border border-cream-200 shadow-2xl" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 bg-white/95 backdrop-blur border-b border-cream-200 rounded-t-2xl">
+          <h3 id="admin-modal-title" class="text-lg sm:text-xl font-bold text-ink-800">
+            Подробная информация о сотруднике
+          </h3>
+          <button
+            type="button"
+            data-close-admin-modal
+            class="w-10 h-10 rounded-xl text-ink-500 hover:bg-cream-100 hover:text-ink-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500"
+            aria-label="Закрыть"
+          >
+            <span class="text-2xl leading-none" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="p-4 sm:p-5">
+          <div class="space-y-4">
+            <div>
+              <h4 class="text-xs uppercase tracking-[0.08em] text-ink-500 font-semibold mb-1.5">Квалификация по диплому</h4>
+              <p class="text-sm sm:text-base leading-relaxed text-ink-800">Биолог, преподаватель биологии и химии</p>
+            </div>
+
+            <div>
+              <h4 class="text-xs uppercase tracking-[0.08em] text-ink-500 font-semibold mb-1.5">Стаж</h4>
+              <p class="text-sm sm:text-base leading-relaxed text-ink-800">Общий/педагогический/в данном учебном заведении: 26 лет</p>
+            </div>
+
+            <div>
+              <h4 class="text-xs uppercase tracking-[0.08em] text-ink-500 font-semibold mb-1.5">Специальность по диплому</h4>
+              <p class="text-sm sm:text-base leading-relaxed text-ink-800">Биология</p>
+            </div>
+
+            <div>
+              <h4 class="text-xs uppercase tracking-[0.08em] text-ink-500 font-semibold mb-1.5">Категория, дата и № приказа</h4>
+              <p class="text-sm sm:text-base leading-relaxed text-ink-800">
+                Высшая, приказ №240 от 26.03.2018 г., зам. директора первой категории, приказ №68 от 16.02.2021 г.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="text-xs uppercase tracking-[0.08em] text-ink-500 font-semibold mb-2">Курсы повышения квалификации</h4>
+              <ul class="space-y-2 text-sm sm:text-base leading-relaxed text-ink-800 list-disc pl-5">
+                <li>АОО "НИШ" - курсы в рамках обновления содержания среднего образования РК - 2020 г.</li>
+                <li>«Создание специальных условий для обучающихся студентов с ООП в колледжах», г. Караганда, 2022 г. РГУ "ННПЦ развития специального и инклюзивного образования" - 36 часов, г. Алматы.</li>
+                <li>"Повышение квалификации преподавателей колледжей в рамках обновления содержания среднего образования РК по биологии", г. Караганда, 2021 г., АО НЦПК "Орлеу", 80 часов.</li>
+                <li>«Онлайн-тренинг по сопровождению родителей/опекунов детей и подростков, имеющих инвалидность, ВИЧ и др. хронические заболевания», Караганда, 17-21 января 2022 года, в рамках проекта РОО "Национальный альянс профессиональных социальных работников" с Представительством Детского фонда ООН в РК и Минтруда и соцзащиты населения в РК, 72 часа.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var modal = document.getElementById('admin-modal');
+      if (!modal) return;
+
+      var openButtons = document.querySelectorAll('[data-open-admin-modal]');
+      var closeButtons = modal.querySelectorAll('[data-close-admin-modal]');
+      var modalBackdrop = document.getElementById('admin-modal-backdrop');
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      openButtons.forEach(function(button) {
+        button.addEventListener('click', openModal);
+      });
+
+      closeButtons.forEach(function(button) {
+        button.addEventListener('click', closeModal);
+      });
+
+      if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', function(event) {
+          if (event.target === modalBackdrop) {
+            closeModal();
+          }
+        });
+      }
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
+</div>

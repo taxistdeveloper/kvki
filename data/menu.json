@@ -9,6 +9,10 @@
                     "slug": "blog-direktora"
                 },
                 {
+                    "title": "Администрация",
+                    "slug": "administratsiya"
+                },
+                {
                     "title": "История колледжа",
                     "slug": "istoriya-kolledzha"
                 },
@@ -108,25 +112,7 @@
         },
         {
             "title": "Поступление",
-            "url": "#",
-            "children": [
-                {
-                    "title": "Правила приёма",
-                    "slug": "pravila-priema"
-                },
-                {
-                    "title": "Специальности",
-                    "slug": "spetsialnosti"
-                },
-                {
-                    "title": "Как подать документы на поступление в колледж онлайн?",
-                    "slug": "kak-podat-dokumenty-na-postuplenie-v-kolledzh-onlayn"
-                },
-                {
-                    "title": "Как поступить в колледж абитуриенту",
-                    "slug": "kak-postupit-v-kolledzh-abiturientu"
-                }
-            ]
+            "slug": "postuplenie"
         },
         {
             "title": "Студентам",

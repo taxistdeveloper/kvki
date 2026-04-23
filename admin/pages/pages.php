@@ -67,6 +67,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page = null;
 $isNew = ($subAction === 'new');
 $loadSlug = trim($_GET['load_slug'] ?? '');
+$defaultNewPageContent = <<<'HTML'
+<!-- Hero -->
+<div class="relative overflow-hidden rounded-2xl bg-white border border-cream-200 shadow-[0_10px_24px_rgba(15,23,42,0.08)] p-8 lg:p-10 mb-10">
+  <div class="relative z-10">
+    <h1 class="text-3xl lg:text-4xl font-extrabold text-ink-800 tracking-tight mb-3">Методическая работа</h1>
+    <p class="text-ink-600 text-lg max-w-2xl leading-relaxed">
+      Система методической работы колледжа направлена на повышение качества образования, развитие профессиональных компетенций педагогов и совершенствование образовательного процесса.
+    </p>
+  </div>
+  <div class="absolute top-0 right-0 w-72 h-72 bg-sage-400/5 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+</div>
+HTML;
 
 if ($editId) {
     $stmt = $db->prepare('SELECT * FROM pages WHERE id = ?');
@@ -123,7 +135,7 @@ $showForm = $page || $isNew || !empty($formError);
     <?php endif; ?>
 
 <?php if ($showForm): ?>
-    <?php $page = $page ?? ['slug' => $postSlug ?? $loadSlug ?? '', 'title' => $postTitle ?? '', 'content' => $postContent ?? '', 'meta_description' => $postMeta ?? '', 'is_active' => $postActive ?? 1]; ?>
+    <?php $page = $page ?? ['slug' => $postSlug ?? $loadSlug ?? '', 'title' => $postTitle ?? '', 'content' => $postContent ?? ($isNew ? $defaultNewPageContent : ''), 'meta_description' => $postMeta ?? '', 'is_active' => $postActive ?? 1]; ?>
     <div class="mb-8 rounded-[28px] border border-black/5 bg-white shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300 overflow-hidden">
         <div class="px-5 py-4 border-b border-cream-200 bg-gradient-to-r from-cream-50 to-white">
             <h2 class="text-lg font-semibold text-ink-800"><?= $editId ? 'Редактировать страницу' : 'Новая страница' ?></h2>
@@ -165,10 +177,16 @@ $showForm = $page || $isNew || !empty($formError);
                         <?php if ($isNew): ?>
                         <div class="mb-4 p-3 bg-cream-50 rounded-xl border border-cream-200 flex flex-wrap items-center gap-3">
                             <span class="text-sm text-ink-600">Загрузить из файла:</span>
-                            <form method="get" action="<?= ADMIN_URL ?>/pages/new" class="inline-flex items-center gap-2">
-                                <input type="text" name="load_slug" value="<?= htmlspecialchars($loadSlug ?? '') ?>" placeholder="o-kolledzhe" class="px-3 py-1.5 border border-cream-200 rounded-lg text-sm font-mono w-48 focus:ring-2 focus:ring-sage-400/30 focus:border-sage-400 outline-none">
-                                <button type="submit" class="px-3 py-1.5 bg-sage-100 text-sage-700 text-sm font-medium rounded-lg hover:bg-sage-200 transition-colors">Загрузить</button>
-                            </form>
+                            <div class="inline-flex items-center gap-2">
+                                <input
+                                    type="text"
+                                    id="load-slug-input"
+                                    value="<?= htmlspecialchars($loadSlug ?? '') ?>"
+                                    placeholder="o-kolledzhe"
+                                    class="px-3 py-1.5 border border-cream-200 rounded-lg text-sm font-mono w-48 focus:ring-2 focus:ring-sage-400/30 focus:border-sage-400 outline-none"
+                                >
+                                <button type="button" id="btn-load-slug-page" class="px-3 py-1.5 bg-sage-100 text-sage-700 text-sm font-medium rounded-lg hover:bg-sage-200 transition-colors">Загрузить</button>
+                            </div>
                             <span class="text-xs text-ink-500">content/pages/<span class="font-mono">slug</span>.html</span>
                         </div>
                         <?php endif; ?>
@@ -435,7 +453,26 @@ $showForm = $page || $isNew || !empty($formError);
 
     var contentFileSlug = document.getElementById('content-file-slug');
     var btnLoadFromFile = document.getElementById('btn-load-from-file');
+    var loadSlugInput = document.getElementById('load-slug-input');
+    var btnLoadSlugPage = document.getElementById('btn-load-slug-page');
     if (slugInput && contentFileSlug) slugInput.addEventListener('input', function() { contentFileSlug.textContent = slugInput.value ? slugInput.value + '.html' : 'slug.html'; });
+    if (btnLoadSlugPage && loadSlugInput) {
+        var goToLoadSlug = function() {
+            var loadSlug = loadSlugInput.value.trim();
+            if (!loadSlug) {
+                loadSlugInput.focus();
+                return;
+            }
+            window.location.href = '<?= ADMIN_URL ?>/pages/new?load_slug=' + encodeURIComponent(loadSlug);
+        };
+        btnLoadSlugPage.addEventListener('click', goToLoadSlug);
+        loadSlugInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                goToLoadSlug();
+            }
+        });
+    }
     if (btnLoadFromFile && slugInput) {
         btnLoadFromFile.addEventListener('click', function() {
             var slug = slugInput.value.trim();

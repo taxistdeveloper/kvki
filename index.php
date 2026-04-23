@@ -643,6 +643,166 @@ try {
                     <div class="p-8 lg:p-12 rounded-3xl bg-cream-50 border border-cream-200 max-w-full">
                         <div class="prose prose-lg max-w-none"><?= str_replace('{{BASE_URL}}', BASE_URL, $pageContent ?? '') ?></div>
                     </div>
+                    <?php if (in_array($slug, ['stroitelnoe-tekhnicheskoe-otdelenie', 'arkhitektury-dizayna-i-dekorativno-prikladnogo-iskusstva', 'professionalno-tekhnicheskie'], true)): ?>
+                        <?php
+                        $departmentInstagramItems = !empty($instagramPosts)
+                            ? $instagramPosts
+                            : $instagramDemoPosts;
+                        $departmentInstagramItemsCount = count($departmentInstagramItems);
+                        $buildInstagramEmbedUrl = static function ($postUrl) {
+                            $url = trim((string)$postUrl);
+                            if ($url === '') return '';
+                            $parts = parse_url($url);
+                            if (empty($parts['scheme']) || empty($parts['host']) || empty($parts['path'])) return '';
+                            $path = rtrim($parts['path'], '/') . '/';
+                            return $parts['scheme'] . '://' . $parts['host'] . $path . 'embed/captioned/';
+                        };
+                        ?>
+                        <section id="instagram-feed" class="mt-8 rounded-3xl border border-cream-200 bg-gradient-to-br from-white to-cream-50 shadow-[0_12px_30px_rgba(15,23,42,0.10)] p-6 sm:p-8 lg:p-10">
+                            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-7">
+                                <div class="max-w-3xl">
+                                    <p class="text-sm lg:text-base font-semibold uppercase tracking-[0.12em] text-sage-700 mb-3">Приоритет UX</p>
+                                    <h2 class="text-3xl lg:text-5xl font-black text-ink-800 tracking-tight leading-tight mb-3">Instagram отделения</h2>
+                                    <p class="text-lg lg:text-2xl text-ink-600 leading-relaxed">
+                                        Крупная типографика, четкая структура и усиленные зоны нажатия для комфортного чтения на любых экранах.
+                                    </p>
+                                </div>
+                                <a href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 min-h-[54px] px-7 py-3 rounded-xl bg-sage-600 text-white text-base lg:text-lg font-semibold hover:bg-sage-700 transition-colors">
+                                    Все публикации
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                                <?php foreach ($departmentInstagramItems as $idx => $item): ?>
+                                    <?php
+                                    $postUrl = $item['url'] ?? '';
+                                    $caption = $item['caption'] ?? '';
+                                    $image = $item['image'] ?? '';
+                                    $embedUrl = $buildInstagramEmbedUrl($postUrl);
+                                    $postType = !empty($image) ? 'demo' : 'embed';
+                                    ?>
+                                    <article class="js-dept-instagram-item rounded-2xl border border-cream-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition"<?= $idx >= 6 ? ' style="display:none;"' : '' ?>>
+                                        <button
+                                            type="button"
+                                            class="js-instagram-open w-full text-left"
+                                            data-post-type="<?= htmlspecialchars($postType) ?>"
+                                            data-post-url="<?= htmlspecialchars($postUrl ?: $instagramProfileUrl) ?>"
+                                            data-post-image="<?= htmlspecialchars($image) ?>"
+                                            data-post-caption="<?= htmlspecialchars($caption) ?>"
+                                        >
+                                            <?php if (!empty($image)): ?>
+                                                <div class="aspect-square bg-cream-100">
+                                                    <img src="<?= htmlspecialchars($image) ?>" alt="Публикация Instagram" class="w-full h-full object-cover">
+                                                </div>
+                                            <?php else: ?>
+                                                <div class="aspect-square bg-gradient-to-br from-pink-50 to-purple-100 flex items-center justify-center">
+                                                    <div class="text-center px-6">
+                                                        <svg class="w-14 h-14 mx-auto mb-3 text-pink-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
+                                                        <p class="text-ink-700 text-base font-semibold">Смотреть пост</p>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </button>
+                                        <div class="p-4 lg:p-5 bg-white">
+                                            <?php if (!empty($caption)): ?>
+                                                <p class="text-base text-ink-600 leading-relaxed mb-4 min-h-[72px]"><?= htmlspecialchars(mb_substr($caption, 0, 150)) ?><?= mb_strlen($caption) > 150 ? '…' : '' ?></p>
+                                            <?php endif; ?>
+                                            <button
+                                                type="button"
+                                                class="js-instagram-open inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-2.5 rounded-xl border border-cream-200 bg-cream-50 text-sage-700 text-base font-semibold hover:border-sage-300 hover:bg-sage-50 transition-colors"
+                                                data-post-type="<?= htmlspecialchars($postType) ?>"
+                                                data-post-url="<?= htmlspecialchars($postUrl ?: $instagramProfileUrl) ?>"
+                                                data-post-image="<?= htmlspecialchars($image) ?>"
+                                                data-post-caption="<?= htmlspecialchars($caption) ?>"
+                                            >
+                                                Просмотр в окне
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php if ($departmentInstagramItemsCount > 6): ?>
+                                <div class="mt-6 flex justify-center">
+                                    <button
+                                        type="button"
+                                        id="dept-instagram-toggle"
+                                        data-state="collapsed"
+                                        class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 py-3 rounded-xl border border-cream-200 bg-white text-sage-700 text-base font-semibold hover:border-sage-300 hover:bg-sage-50 transition-colors"
+                                    >
+                                        <span>Показать больше</span>
+                                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                            <div id="instagram-post-modal" class="fixed inset-0 z-[100] hidden" aria-hidden="true">
+                                <div class="absolute inset-0 bg-black/70" data-instagram-modal-close></div>
+                                <div class="relative w-full h-full p-4 sm:p-6 lg:p-10 overflow-y-auto">
+                                    <div class="max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl">
+                                        <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-black/10">
+                                            <h3 class="text-lg sm:text-xl font-bold text-ink-800">Публикация Instagram</h3>
+                                            <button type="button" class="w-10 h-10 rounded-xl border border-black/10 hover:bg-black/5 text-ink-600 flex items-center justify-center" data-instagram-modal-close aria-label="Закрыть">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                            </button>
+                                        </div>
+                                        <div id="instagram-modal-content" class="p-5 sm:p-6"></div>
+                                        <div class="px-5 sm:px-6 pb-6 flex justify-end">
+                                            <a id="instagram-modal-link" href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white" style="background-color: #253f50;">
+                                                Открыть в Instagram
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if ($departmentInstagramItemsCount > 6): ?>
+                                <script>
+                                    (function() {
+                                        const toggleBtn = document.getElementById('dept-instagram-toggle');
+                                        if (!toggleBtn) return;
+                                        const items = document.querySelectorAll('.js-dept-instagram-item');
+                                        if (!items.length) return;
+
+                                        const toggleLabel = toggleBtn.querySelector('span');
+                                        const toggleIcon = toggleBtn.querySelector('svg');
+
+                                        function expand() {
+                                            items.forEach((item) => {
+                                                item.style.display = '';
+                                            });
+                                            toggleBtn.dataset.state = 'expanded';
+                                            if (toggleLabel) toggleLabel.textContent = 'Показать меньше';
+                                            if (toggleIcon) toggleIcon.classList.add('rotate-180');
+                                        }
+
+                                        function collapse() {
+                                            items.forEach((item, index) => {
+                                                item.style.display = index >= 6 ? 'none' : '';
+                                            });
+                                            toggleBtn.dataset.state = 'collapsed';
+                                            if (toggleLabel) toggleLabel.textContent = 'Показать больше';
+                                            if (toggleIcon) toggleIcon.classList.remove('rotate-180');
+                                        }
+
+                                        toggleBtn.addEventListener('click', function() {
+                                            if (toggleBtn.dataset.state === 'collapsed') {
+                                                expand();
+                                            } else {
+                                                collapse();
+                                            }
+                                        });
+                                    })();
+                                </script>
+                            <?php endif; ?>
+                        </section>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
