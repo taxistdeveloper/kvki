@@ -69,7 +69,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
 </head>
 
 <body class="font-sans antialiased bg-cream-100 text-ink-800 min-h-screen flex flex-col has-mobile-nav">
-    <header class="site-header sticky top-0 z-50 shadow-sm" id="site-header">
+    <header class="site-header sticky top-0 z-50 w-full shadow-sm" id="site-header">
         <!-- Верхняя панель: навигация, контакты, язык (скрывается при прокрутке) -->
         <?php if (($hs['top_bar_visible'] ?? '1') === '1'): ?>
             <div id="header-top-bar" class="header-top-bar bg-cream-100/90 border-b border-cream-200 transition-all duration-300 ease-out">
@@ -85,7 +85,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                         </svg>
                                     </a>
                                     <div class="absolute left-0 top-full pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                                        <div class="bg-cream-50 rounded-xl shadow-lg border border-cream-200 py-2 min-w-[180px]">
+                                        <div class="bg-white rounded-xl header-flyout border border-cream-200 py-2 min-w-[180px]">
                                             <?php foreach ($headerAboutLinks as $link): ?>
                                                 <?php $linkUrl = (str_starts_with($link['url'], 'http') ? $link['url'] : (BASE_URL . (str_starts_with($link['url'], '/') ? $link['url'] : '/' . $link['url']))); ?>
                                                 <a href="<?= htmlspecialchars($linkUrl) ?>" class="block px-4 py-2 text-ink-700 hover:bg-cream-100 hover:text-sage-600 transition-colors"><?= htmlspecialchars($link['title']) ?></a>
@@ -113,7 +113,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                     </svg>
                                 </button>
                                 <div class="absolute right-0 top-full pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                                    <div class="bg-cream-50 rounded-xl shadow-lg border border-cream-200 py-2 min-w-[200px] text-right">
+                                    <div class="bg-white rounded-xl header-flyout border border-cream-200 py-2 min-w-[200px] text-right">
                                         <a href="tel:<?= htmlspecialchars(preg_replace('/\D/', '', $hs['phone_primary'] ?? '')) ?>" class="block px-4 py-2 text-ink-700 hover:bg-cream-100 hover:text-sage-600 transition-colors"><?= htmlspecialchars($hs['phone_primary'] ?? '+7 (747) 094 10 00') ?></a>
                                         <a href="tel:<?= htmlspecialchars(preg_replace('/\D/', '', $hs['phone_secondary'] ?? '')) ?>" class="block px-4 py-2 text-ink-700 hover:bg-cream-100 hover:text-sage-600 transition-colors"><?= htmlspecialchars($hs['phone_secondary'] ?? '+7 (700) 123 45 67') ?></a>
                                         <?php if (!empty($hs['phone_home'])): ?>
@@ -158,7 +158,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                     </svg>
                                 </button>
                                 <div class="absolute right-0 top-full pt-0.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-                                    <div class="bg-cream-50 rounded-xl shadow-lg border border-cream-200 py-2 min-w-[100px]">
+                                    <div class="bg-white rounded-xl header-flyout border border-cream-200 py-2 min-w-[100px]">
 
                                         <a href="#" class="block px-4 py-2 text-left text-ink-700 hover:bg-cream-100 hover:text-sage-600 transition-colors">Қаз</a>
                                         <a href="#" class="block px-4 py-2 text-left text-ink-700 hover:bg-cream-100 hover:text-sage-600 transition-colors">Eng</a>
@@ -172,10 +172,11 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
         <?php endif; ?>
 
         <!-- Основной header -->
-        <div class="bg-cream-50 border-b border-cream-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16 lg:h-20">
-                    <a href="<?= BASE_URL ?>/" class="flex items-center gap-3 group">
+        <div class="header-main-wrap w-full pb-3 pt-2">
+            <div class="header-main-panel w-full px-4 sm:px-6 lg:px-8 rounded-2xl bg-white shadow-lg border border-cream-200/70">
+                <div class="relative flex items-center justify-center h-16 lg:h-20 w-full">
+                    <div class="flex items-center justify-center gap-6 xl:gap-10">
+                    <a href="<?= BASE_URL ?>/" class="flex items-center gap-3 group shrink-0">
                         <div class="flex items-center justify-center rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 ring-1 ring-cream-200/60 p-0.5 min-w-[48px] min-h-[48px] lg:min-w-[56px] lg:min-h-[56px]">
                             <?php $logoFile = file_exists(ROOT_PATH . '/assets/images/logo/logo-50.png') ? 'logo-50.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo-50.svg') ? 'logo-50.svg' : null); ?>
                             <?php if ($logoFile): ?>
@@ -204,7 +205,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                 </a>
                                 <?php if (!empty($item['children'])): ?>
                                     <div class="absolute left-0 top-full pt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                        <div class="bg-cream-50 rounded-2xl shadow-lg border border-cream-200 py-2 min-w-[260px]">
+                                        <div class="bg-white rounded-2xl header-flyout border border-cream-200 py-2 min-w-[260px]">
                                             <?php foreach ($item['children'] as $child): ?>
                                                 <div class="relative submenu-item">
                                                     <a href="<?= htmlspecialchars($child['url']) ?>" class="flex items-center justify-between px-5 py-3 text-base text-ink-700 hover:bg-cream-200 hover:text-sage-700 transition-colors">
@@ -214,7 +215,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                                             </svg><?php endif; ?>
                                                     </a>
                                                     <?php if (!empty($child['children'])): ?>
-                                                        <div class="absolute left-full top-0 ml-1 hidden submenu-children bg-cream-50 rounded-2xl shadow-lg border border-cream-200 py-2 min-w-[260px]">
+                                                        <div class="absolute left-full top-0 ml-1 hidden submenu-children bg-white rounded-2xl header-flyout border border-cream-200 py-2 min-w-[260px]">
                                                             <?php foreach ($child['children'] as $grandchild): ?>
                                                                 <div class="relative submenu-item">
                                                                     <a href="<?= htmlspecialchars($grandchild['url']) ?>" class="flex items-center justify-between px-5 py-3 text-base text-ink-700 hover:bg-cream-200 hover:text-sage-700 transition-colors">
@@ -224,7 +225,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                                                                             </svg><?php endif; ?>
                                                                     </a>
                                                                     <?php if (!empty($grandchild['children'])): ?>
-                                                                        <div class="absolute left-full top-0 ml-1 hidden submenu-children bg-cream-50 rounded-2xl shadow-lg border border-cream-200 py-2 min-w-[260px]">
+                                                                        <div class="absolute left-full top-0 ml-1 hidden submenu-children bg-white rounded-2xl header-flyout border border-cream-200 py-2 min-w-[260px]">
                                                                             <?php foreach ($grandchild['children'] as $ggc): ?>
                                                                                 <a href="<?= htmlspecialchars($ggc['url']) ?>" class="block px-5 py-3 text-base text-ink-700 hover:bg-cream-200 hover:text-sage-700 transition-colors"><?= htmlspecialchars($ggc['title']) ?></a>
                                                                             <?php endforeach; ?>
@@ -242,8 +243,9 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                             </div>
                         <?php endforeach; ?>
                     </nav>
+                    </div>
 
-                    <div class="xl:hidden">
+                    <div class="absolute right-0 top-0 bottom-0 flex items-center xl:hidden">
                         <button type="button" id="mobile-menu-btn" class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-ink-600 hover:bg-cream-200 transition-colors" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
                             <svg class="w-6 h-6 menu-icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -255,6 +257,7 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
                     </div>
                 </div>
             </div>
+        </div>
     </header>
 
     <div id="mobile-menu-overlay" class="mobile-menu-overlay xl:hidden" aria-hidden="true"></div>

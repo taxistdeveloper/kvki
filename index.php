@@ -637,18 +637,11 @@ try {
                 <?php require __DIR__ . '/templates/news-list.php'; ?>
             </div>
         <?php else: ?>
-            <!-- Внутренние страницы -->
-            <?php $sidebarData = $menu->getSidebarItems($slug); ?>
-            <?php $wideSlugs = ['blog-direktora', 'istoriya-kolledzha', 'metodicheskaya-rabota', 'antikorruptsionnyy-kompleks', 'tsel-i-napravlenie', 'sotsialnye-partnery', 'professionalno-tekhnicheskie', 'perechen-gosudarstvennykh-uslug', 'gosudarstvennye-simvoly']; $isWide = count(array_filter($wideSlugs, fn($s) => str_contains($slug, $s))) > 0; ?>
-            <div class="<?= $isWide ? 'max-w-screen-2xl' : 'max-w-7xl' ?> mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-                <div class="flex flex-col lg:flex-row gap-8 lg:gap-10">
-                    <?php if ($sidebarData): ?>
-                        <?php require __DIR__ . '/templates/sidebar.php'; ?>
-                    <?php endif; ?>
-                    <div class="flex-1 min-w-0">
-                        <div class="p-8 lg:p-12 rounded-3xl bg-cream-50 border border-cream-200 <?= $isWide ? 'max-w-full' : '' ?>">
-                            <div class="prose prose-lg max-w-none"><?= str_replace('{{BASE_URL}}', BASE_URL, $pageContent ?? '') ?></div>
-                        </div>
+            <!-- Внутренние страницы (без сайдбара — полная ширина контента) -->
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+                <div class="min-w-0">
+                    <div class="p-8 lg:p-12 rounded-3xl bg-cream-50 border border-cream-200 max-w-full">
+                        <div class="prose prose-lg max-w-none"><?= str_replace('{{BASE_URL}}', BASE_URL, $pageContent ?? '') ?></div>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,25 @@
   overflow: hidden;
 }
 
+/* Основная полоса header — плотнее к верху экрана, когда шапка в режиме прокрутки */
+.site-header.scrolled .header-main-wrap {
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+}
+
+.site-header.scrolled .header-main-panel {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Выпадающие блоки в header — заметная карточная тень */
+.header-flyout {
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
 .mobile-menu {
   position: fixed;
   top: 0;

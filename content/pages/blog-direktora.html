@@ -1,242 +1,474 @@
-<div class="blog-direktor not-prose">
-  <!-- Hero — приветствие (новый стиль: крупный заголовок, минималистичный) -->
-  <header class="relative mb-14 lg:mb-16">
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-      <div class="lg:max-w-2xl">
-        <span class="inline-block text-xs font-bold uppercase tracking-[0.2em] text-sage-600 mb-4">Блог директора</span>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-800 tracking-tight leading-[1.15] mb-5">
+<div class="blog-direktor not-prose w-full max-w-none">
+
+  <!-- Hero -->
+
+  <header class="relative mb-16 lg:mb-20">
+
+    <div class="flex flex-col gap-10 xl:flex-row xl:items-end xl:justify-between">
+
+      <div class="min-w-0 flex-1 xl:max-w-[58rem]">
+
+        <span class="inline-block text-sm font-bold uppercase tracking-[0.18em] text-sage-600 mb-5">Блог директора</span>
+
+        <h1 class="text-4xl sm:text-5xl xl:text-6xl font-extrabold text-ink-800 tracking-tight leading-[1.12] mb-6">
+
           Добро пожаловать
+
           <br class="hidden sm:block" />
+
           в мой блог
+
         </h1>
-        <p class="text-ink-600 text-lg lg:text-xl leading-relaxed">
+
+        <p class="text-ink-700 text-xl sm:text-2xl leading-[1.65] font-normal">
+
           Я рада приветствовать Вас! Надеюсь, этот ресурс станет площадкой для обсуждения вопросов деятельности колледжа. Вы можете оставить комментарии, задать вопросы, внести предложения.
+
         </p>
+
       </div>
-      <div class="mt-8 lg:mt-0 flex flex-wrap gap-2">
+
+      <div class="flex flex-col sm:flex-row flex-wrap gap-3 shrink-0">
+
         <button
+
           type="button"
+
           data-open-question-modal
-          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-sage-600 text-sm font-medium hover:bg-sage-700 transition-colors"
+
+          class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-sage-600 text-base font-semibold hover:bg-sage-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2"
+
           style="color: #fff;"
+
         >
+
           <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+
             <path stroke-linecap="round" stroke-linejoin="round" d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+
           </svg>
+
           Задать вопрос
+
         </button>
+
         <a
+
           href="{{BASE_URL}}/svedeniya-o-deklaratsii"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-sage-400/60 text-sage-700 text-sm font-medium hover:bg-sage-500/10 transition-colors"
+
+          class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full border-2 border-sage-400/50 text-sage-800 text-base font-semibold hover:bg-sage-500/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2"
+
         >
-          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
             <path
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
               stroke-width="2"
+
               d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+
             />
+
           </svg>
+
           Декларация
+
         </a>
+
       </div>
+
     </div>
+
   </header>
 
-  <!-- Карточка директора — двухколоночный layout с акцентом на фото -->
-  <section class="mb-14 lg:mb-16">
-    <div class="grid lg:grid-cols-[minmax(0,320px)_1fr] gap-0 lg:gap-0 bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(45,74,45,0.08)] border border-cream-200">
-      <!-- Фото — полноширинное на мобильных, боковая колонка на десктопе -->
-      <div class="relative lg:min-h-[480px] bg-gradient-to-b from-sage-800/5 to-cream-50 p-8 lg:p-10 flex items-center justify-center">
-        <div class="relative w-full max-w-[220px] lg:max-w-none mx-auto">
-          <div class="aspect-[3/4] max-h-[320px] lg:max-h-[420px] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(45,74,45,0.15)] ring-2 ring-white/80">
+
+
+  <!-- Карточка директора -->
+
+  <section class="mb-16 lg:mb-20">
+
+    <div class="grid lg:grid-cols-[minmax(0,22rem)_1fr] xl:grid-cols-[minmax(0,26rem)_1fr] gap-0 bg-white rounded-2xl xl:rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(45,74,45,0.1)] border border-cream-200/90">
+
+      <div class="relative lg:min-h-[520px] xl:min-h-[560px] bg-gradient-to-b from-sage-800/[0.06] to-cream-50 p-10 lg:p-12 flex items-center justify-center">
+
+        <div class="relative w-full max-w-[240px] sm:max-w-[260px] lg:max-w-none mx-auto">
+
+          <div class="aspect-[3/4] max-h-[340px] lg:max-h-[440px] xl:max-h-[480px] rounded-2xl xl:rounded-3xl overflow-hidden shadow-[0_24px_60px_rgba(45,74,45,0.18)] ring-2 ring-white/90">
+
             <img
+
               src="{{BASE_URL}}/assets/images/direktor/direktor.png"
+
               alt="Сапарова Асель Сагинбаевна — директор КГКП «Карагандинский технико–строительный колледж»"
+
               class="w-full h-full object-cover"
+
               onerror="
+
                 this.src = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&amp;fit=crop&amp;w=400&amp;q=80';
+
                 this.alt = 'Фото директора';
+
               "
+
             />
+
           </div>
+
         </div>
+
       </div>
 
-      <!-- Контент -->
-      <div class="p-6 lg:p-10 lg:pl-12">
-        <div class="flex flex-wrap gap-2 mb-3">
-          <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold bg-sage-600 text-white">Директор</span>
-          <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold text-sage-700 bg-sage-500/15">С 2022 года</span>
-        </div>
-        <h2 class="text-2xl lg:text-3xl font-bold text-ink-800 mb-1">Сапарова Асель Сагинбаевна</h2>
-        <p class="text-sage-600 font-medium mb-6">КГКП «Карагандинский технико–строительный колледж»</p>
 
-        <!-- Краткие факты — горизонтальная полоса -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-          <div class="p-4 rounded-xl bg-cream-50/80 border border-cream-200/80">
-            <div class="text-xl font-bold text-sage-700">12 лет</div>
-            <div class="text-xs text-ink-600 mt-0.5">руководства</div>
-          </div>
-          <div class="p-4 rounded-xl bg-cream-50/80 border border-cream-200/80">
-            <div class="text-xl font-bold text-sage-700">С 2004</div>
-            <div class="text-xs text-ink-600 mt-0.5">в образовании</div>
-          </div>
-          <div class="p-4 rounded-xl bg-cream-50/80 border border-cream-200/80">
-            <div class="text-xl font-bold text-sage-700">Высшая</div>
-            <div class="text-xs text-ink-600 mt-0.5">категория</div>
-          </div>
-          <div class="p-4 rounded-xl bg-cream-50/80 border border-cream-200/80">
-            <div class="text-xl font-bold text-sage-700">Магистр</div>
-            <div class="text-xs text-ink-600 mt-0.5">юр. наук</div>
-          </div>
+
+      <div class="p-8 sm:p-10 lg:p-12 xl:p-14 lg:pl-10 xl:pl-12">
+
+        <div class="flex flex-wrap gap-2.5 mb-4">
+
+          <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-sm font-bold bg-sage-600 text-white">Директор</span>
+
+          <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl text-sm font-semibold text-sage-800 bg-sage-500/15">С 2022 года</span>
+
         </div>
 
-        <!-- Текст и награды -->
-        <div class="space-y-5 text-ink-600 leading-relaxed text-[15px]">
+        <h2 class="text-3xl sm:text-4xl xl:text-[2.5rem] font-bold text-ink-800 mb-2 tracking-tight">Сапарова Асель Сагинбаевна</h2>
+
+        <p class="text-sage-700 text-lg sm:text-xl font-medium mb-8 xl:mb-10">КГКП «Карагандинский технико–строительный колледж»</p>
+
+
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-10 xl:mb-12">
+
+          <div class="p-4 sm:p-5 rounded-2xl bg-cream-50 border border-cream-200/90">
+
+            <div class="text-2xl sm:text-3xl font-bold text-sage-700 tabular-nums">12 лет</div>
+
+            <div class="text-sm text-ink-600 mt-1 leading-snug">руководства</div>
+
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-2xl bg-cream-50 border border-cream-200/90">
+
+            <div class="text-2xl sm:text-3xl font-bold text-sage-700 tabular-nums">С 2004</div>
+
+            <div class="text-sm text-ink-600 mt-1 leading-snug">в образовании</div>
+
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-2xl bg-cream-50 border border-cream-200/90">
+
+            <div class="text-2xl sm:text-3xl font-bold text-sage-700">Высшая</div>
+
+            <div class="text-sm text-ink-600 mt-1 leading-snug">категория</div>
+
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-2xl bg-cream-50 border border-cream-200/90">
+
+            <div class="text-2xl sm:text-3xl font-bold text-sage-700">Магистр</div>
+
+            <div class="text-sm text-ink-600 mt-1 leading-snug">юр. наук</div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="space-y-7 text-ink-700 text-lg sm:text-xl leading-[1.75]">
+
           <p>
+
             Опыт работы в организации образования с 2004 года. Стаж работы на руководящей должности директора составляет — 12 лет. Педагог высшей квалификационной категории, руководитель первой
+
             категории по должности директор. Ученое звание — магистр юридических наук.
+
           </p>
 
-          <div class="p-5 rounded-2xl bg-sage-500/5 border-l-4 border-sage-500">
-            <p class="font-semibold text-ink-800 mb-2 flex items-center gap-2">
-              <svg class="w-5 h-5 text-sage-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+
+          <div class="p-6 sm:p-8 rounded-2xl xl:rounded-3xl bg-sage-500/[0.07] border border-sage-400/20 border-l-[5px] border-l-sage-600">
+
+            <p class="font-bold text-ink-800 text-xl mb-3 flex items-center gap-2.5">
+
+              <svg class="w-6 h-6 text-sage-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+
               </svg>
+
               Награды
+
             </p>
-            <p class="text-ink-600 text-sm leading-relaxed">
+
+            <p class="text-ink-700 text-base sm:text-lg leading-[1.7]">
+
               Благодарственные письма Акима района им. Казыбек би, Акима Октябрьского района, Акима Карагандинской области, почётная грамота Акима г. Караганды, почетная грамота Министерства
+
               образования и науки РК, благодарственное письмо Карагандинской областной организации профсоюза работников образования и науки, диплом III степени «Лучший руководитель образовательного
+
               учреждения – 2018», обладатель нагрудного знака «Ы. Алтынсарин».
+
             </p>
+
           </div>
 
+
+
           <p>
+
             Сапарова А.С. обладает высокими профессиональными знаниями для выполнения возложенных должностных обязанностей и исключительным практическим опытом. Блестяще планирует работу, при решении
+
             тех или иных вопросов исходит из интересов дела. Директор — квалифицированный специалист, знающий основы общетеоретических дисциплин в объеме, необходимом для решения педагогических,
+
             научно-методических и организационно-управленческих задач. В своей деятельности руководствуется принципами ответственности, конфиденциальности, доброжелательности.
+
           </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- CTA-блок — компактная полоса -->
-  <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+
+
+  <!-- CTA -->
+
+  <div class="flex flex-col sm:flex-row gap-4">
+
     <button
+
       type="button"
+
       data-open-question-modal
-      class="group flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 bg-sage-600 text-white font-semibold rounded-xl hover:bg-sage-700 hover:shadow-lg hover:shadow-sage-600/20 transition-all duration-200"
+
+      class="group flex-1 inline-flex items-center justify-center gap-3 px-7 py-5 bg-sage-600 text-white text-lg font-semibold rounded-2xl hover:bg-sage-700 hover:shadow-lg hover:shadow-sage-600/25 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2"
+
     >
-      <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 group-hover:bg-white/25 transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+      <span class="flex items-center justify-center w-11 h-11 rounded-xl bg-white/20 group-hover:bg-white/25 transition-colors">
+
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+
         </svg>
+
       </span>
+
       Задать вопрос директору
+
     </button>
+
     <a
+
       href="{{BASE_URL}}/svedeniya-o-deklaratsii"
-      class="group flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 bg-cream-50 border-2 border-cream-200 text-sage-700 font-semibold rounded-xl hover:border-sage-400 hover:bg-cream-100 transition-all duration-200"
+
+      class="group flex-1 inline-flex items-center justify-center gap-3 px-7 py-5 bg-cream-50 border-2 border-cream-200 text-sage-800 text-lg font-semibold rounded-2xl hover:border-sage-400 hover:bg-cream-100 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2"
+
     >
-      <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+      <span class="flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
+
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+
           <path
+
             stroke-linecap="round"
+
             stroke-linejoin="round"
+
             stroke-width="2"
+
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+
           />
+
         </svg>
+
       </span>
+
       Сведения о декларации
+
     </a>
+
   </div>
 
-  <!-- Модальное окно: форма вопроса директору -->
+
+
   <div id="question-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="question-modal-title">
+
     <div class="fixed inset-0 bg-ink-900/60 backdrop-blur-sm" data-close-question-modal></div>
+
     <div id="question-modal-backdrop" class="fixed inset-0 flex items-center justify-center p-4 overflow-y-auto">
-      <div class="relative w-full max-w-[480px] bg-white rounded-2xl shadow-2xl border border-cream-200 animate-[fadeIn_0.2s_ease-out]" onclick="event.stopPropagation()">
-        <div class="p-6 lg:p-8">
-          <div class="flex items-center justify-between mb-6">
-            <h2 id="question-modal-title" class="text-xl font-bold text-ink-800">Вопрос директору</h2>
-            <button type="button" data-close-question-modal class="p-2 rounded-lg text-ink-500 hover:bg-cream-100 hover:text-ink-700 transition-colors" aria-label="Закрыть">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+
+      <div class="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-cream-200 animate-[fadeIn_0.2s_ease-out]" onclick="event.stopPropagation()">
+
+        <div class="p-7 sm:p-9">
+
+          <div class="flex items-center justify-between mb-7">
+
+            <h2 id="question-modal-title" class="text-2xl font-bold text-ink-800">Вопрос директору</h2>
+
+            <button type="button" data-close-question-modal class="p-2.5 rounded-xl text-ink-500 hover:bg-cream-100 hover:text-ink-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500" aria-label="Закрыть">
+
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+
             </button>
+
           </div>
-          <form id="question-form" class="space-y-4">
+
+          <form id="question-form" class="space-y-5">
+
             <div>
-              <label for="question-name" class="block text-sm font-medium text-ink-700 mb-1.5">Ваше имя</label>
+
+              <label for="question-name" class="block text-base font-medium text-ink-700 mb-2">Ваше имя</label>
+
               <input type="text" id="question-name" name="name" required placeholder="Иван Иванов"
-                class="w-full px-4 py-3 rounded-xl border border-cream-200 text-ink-800 placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors">
+
+                class="w-full px-4 py-3.5 rounded-xl border border-cream-200 text-ink-800 text-base placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors">
+
             </div>
+
             <div>
-              <label for="question-email" class="block text-sm font-medium text-ink-700 mb-1.5">Email</label>
+
+              <label for="question-email" class="block text-base font-medium text-ink-700 mb-2">Email</label>
+
               <input type="email" id="question-email" name="email" required placeholder="example@mail.kz"
-                class="w-full px-4 py-3 rounded-xl border border-cream-200 text-ink-800 placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors">
+
+                class="w-full px-4 py-3.5 rounded-xl border border-cream-200 text-ink-800 text-base placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors">
+
             </div>
+
             <div>
-              <label for="question-message" class="block text-sm font-medium text-ink-700 mb-1.5">Ваш вопрос</label>
-              <textarea id="question-message" name="message" required rows="4" placeholder="Опишите ваш вопрос или предложение..."
-                class="w-full px-4 py-3 rounded-xl border border-cream-200 text-ink-800 placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors resize-none"></textarea>
+
+              <label for="question-message" class="block text-base font-medium text-ink-700 mb-2">Ваш вопрос</label>
+
+              <textarea id="question-message" name="message" required rows="5" placeholder="Опишите ваш вопрос или предложение..."
+
+                class="w-full px-4 py-3.5 rounded-xl border border-cream-200 text-ink-800 text-base placeholder:text-ink-400 focus:border-sage-500 focus:ring-2 focus:ring-sage-500/20 outline-none transition-colors resize-none min-h-[140px]"></textarea>
+
             </div>
-            <div class="flex gap-3 pt-2">
-              <button type="submit" class="flex-1 px-5 py-3 bg-sage-600 text-white font-semibold rounded-xl hover:bg-sage-700 transition-colors">
-                Отправить
-              </button>
-              <button type="button" data-close-question-modal class="px-5 py-3 border border-cream-200 text-ink-600 font-medium rounded-xl hover:bg-cream-100 transition-colors">
+
+            <div class="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+
+              <button type="button" data-close-question-modal class="sm:flex-initial px-6 py-3.5 border-2 border-cream-200 text-ink-700 font-semibold rounded-xl hover:bg-cream-100 transition-colors text-base">
+
                 Отмена
+
               </button>
+
+              <button type="submit" class="flex-1 px-6 py-3.5 bg-sage-600 text-white font-semibold rounded-xl hover:bg-sage-700 transition-colors text-base">
+
+                Отправить
+
+              </button>
+
             </div>
+
           </form>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
+
 
   <script>
+
   (function() {
+
     const modal = document.getElementById('question-modal');
+
     const form = document.getElementById('question-form');
+
     if (!modal || !form) return;
 
+
+
     function openModal() {
+
       modal.classList.remove('hidden');
+
       document.body.style.overflow = 'hidden';
+
       modal.querySelector('#question-name')?.focus();
+
     }
+
     function closeModal() {
+
       modal.classList.add('hidden');
+
       document.body.style.overflow = '';
+
     }
+
+
 
     document.querySelectorAll('[data-open-question-modal]').forEach(function(btn) {
+
       btn.addEventListener('click', openModal);
-    });
-    document.querySelectorAll('[data-close-question-modal]').forEach(function(btn) {
-      btn.addEventListener('click', closeModal);
-    });
-    var backdrop = document.getElementById('question-modal-backdrop');
-    if (backdrop) backdrop.addEventListener('click', function(e) {
-      if (e.target === backdrop) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+
     });
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var name = document.getElementById('question-name').value.trim();
-      var email = document.getElementById('question-email').value.trim();
-      var subject = encodeURIComponent('Вопрос директору');
-      var body = encodeURIComponent('Имя: ' + name + '\nEmail: ' + email + '\n\nВопрос:\n' + document.getElementById('question-message').value.trim());
-      window.location.href = 'mailto:info@kvki.kz?subject=' + subject + '&body=' + body;
-      closeModal();
+    document.querySelectorAll('[data-close-question-modal]').forEach(function(btn) {
+
+      btn.addEventListener('click', closeModal);
+
     });
+
+    var backdrop = document.getElementById('question-modal-backdrop');
+
+    if (backdrop) backdrop.addEventListener('click', function(e) {
+
+      if (e.target === backdrop) closeModal();
+
+    });
+
+    document.addEventListener('keydown', function(e) {
+
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+
+    });
+
+
+
+    form.addEventListener('submit', function(e) {
+
+      e.preventDefault();
+
+      var name = document.getElementById('question-name').value.trim();
+
+      var email = document.getElementById('question-email').value.trim();
+
+      var subject = encodeURIComponent('Вопрос директору');
+
+      var body = encodeURIComponent('Имя: ' + name + '\nEmail: ' + email + '\n\nВопрос:\n' + document.getElementById('question-message').value.trim());
+
+      window.location.href = 'mailto:info@kvki.kz?subject=' + subject + '&body=' + body;
+
+      closeModal();
+
+    });
+
   })();
+
   </script>
+
 </div>
+
