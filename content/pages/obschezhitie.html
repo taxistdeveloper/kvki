@@ -1,1 +1,179 @@
-<p><br></p>
+<!-- Hero Section - Премиум версия -->
+<div class="relative overflow-hidden rounded-3xl bg-white border border-cream-200 shadow-[0_20px_60px_rgba(15,23,42,0.12)] p-8 md:p-14 lg:p-20 mb-20">
+  <div class="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    
+    <!-- Левый текст -->
+    <div class="lg:col-span-7">
+      <div class="inline-flex items-center gap-2.5 bg-gradient-to-r from-sage-100 to-emerald-100 text-emerald-700 text-sm font-semibold px-5 py-2.5 rounded-3xl mb-8 shadow-sm">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+        </span>
+        Караганда • Студенческое общежитие
+      </div>
+      
+      <h1 class="text-6xl md:text-7xl lg:text-[4.5rem] font-black text-ink-950 tracking-tighter leading-none mb-6">
+        Общежитие<br>твоего уровня
+      </h1>
+      
+      <p class="text-2xl text-ink-600 max-w-xl leading-relaxed">
+        Современное комфортное жильё для студентов. Чистота, безопасность, быстрый Wi-Fi и тёплая атмосфера.
+      </p>
+      
+      <div class="flex flex-wrap gap-4 mt-12">
+        <a href="#booking" 
+           class="px-10 py-6 bg-ink-900 hover:bg-black text-white font-semibold text-xl rounded-3xl transition-all active:scale-[0.97] shadow-lg shadow-ink-900/30">
+          Забронировать место
+        </a>
+        <a href="#virtual-tour" 
+           class="px-10 py-6 border-2 border-ink-200 hover:border-ink-300 font-semibold text-xl rounded-3xl transition-all active:scale-[0.97]">
+          Виртуальный тур →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-3 gap-8 mt-16">
+        <div>
+          <div class="text-5xl font-bold text-ink-900">180+</div>
+          <div class="text-ink-500 mt-1">мест</div>
+        </div>
+        <div>
+          <div class="text-5xl font-bold text-ink-900">4.9</div>
+          <div class="text-ink-500 mt-1">рейтинг</div>
+        </div>
+        <div>
+          <div class="text-5xl font-bold text-ink-900">5 мин</div>
+          <div class="text-ink-500 mt-1">до университета</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Правый визуал -->
+    <div class="lg:col-span-5 relative">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3.3]">
+        <img src="https://picsum.photos/id/1015/1200/900" 
+             alt="Общежитие в Караганде" 
+             class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110">
+        
+        <!-- Градиентная подложка -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+      </div>
+
+      <!-- Плавающие элементы -->
+      <div class="absolute -top-6 -right-6 bg-white rounded-3xl shadow-xl px-6 py-4 flex items-center gap-4">
+        <div class="text-4xl">🏠</div>
+        <div>
+          <div class="font-semibold text-emerald-600">28 мест свободно</div>
+          <div class="text-sm text-ink-500">на апрель 2026</div>
+        </div>
+      </div>
+
+      <div class="absolute -bottom-6 -left-6 bg-white rounded-3xl shadow-xl p-5 flex items-center gap-4">
+        <div class="flex">
+          <span class="text-3xl">★</span>
+          <span class="text-3xl">★</span>
+          <span class="text-3xl">★</span>
+          <span class="text-3xl">★</span>
+          <span class="text-3xl text-amber-400">★</span>
+        </div>
+        <div class="leading-tight">
+          <div class="font-bold">4.9 из 5</div>
+          <div class="text-xs text-ink-500">по отзывам студентов</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Декоративный элемент -->
+  <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-sage-300/10 to-transparent rounded-full blur-3xl -z-10"></div>
+</div>
+
+<!-- ====================== ГАЛЕРЕЯ ====================== -->
+<div class="mb-24">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+    <div>
+      <h2 class="text-5xl font-black tracking-tighter text-ink-950">Галерея</h2>
+      <p class="text-xl text-ink-600 mt-3">Покажем, как у нас на самом деле</p>
+    </div>
+    <button onclick="openLightbox()" 
+            class="mt-6 md:mt-0 flex items-center gap-3 text-lg font-medium text-ink-700 hover:text-ink-900 transition-colors">
+      Смотреть все 24 фото 
+      <span class="text-2xl">→</span>
+    </button>
+  </div>
+
+  <!-- Улучшенная Masonry галерея -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-fr">
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-[4/3]" onclick="openImage(1)">
+      <img src="https://picsum.photos/id/1015/800/600" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Фасад здания</div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-square" onclick="openImage(2)">
+      <img src="https://picsum.photos/id/201/800/800" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Комната на двоих</div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-[4/3] lg:col-span-1" onclick="openImage(3)">
+      <img src="https://picsum.photos/id/133/800/600" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Современная кухня</div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-square" onclick="openImage(4)">
+      <img src="https://picsum.photos/id/251/800/800" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Зона отдыха</div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-[4/3] md:col-span-2 lg:col-span-1" onclick="openImage(5)">
+      <img src="https://picsum.photos/id/866/1200/800" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Душевые и санузлы</div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl cursor-pointer aspect-square" onclick="openImage(6)">
+      <img src="https://picsum.photos/id/1016/800/800" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="">
+      <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all"></div>
+      <div class="absolute bottom-6 left-6 text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all">Учебная зона</div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4">
+  <div class="relative max-w-5xl w-full">
+    <button onclick="closeLightbox()" class="absolute -top-14 right-4 text-white text-5xl hover:text-white/70 transition-colors">×</button>
+    <img id="lightbox-image" src="" class="w-full rounded-3xl shadow-2xl max-h-[88vh] object-contain" alt="">
+    <p id="lightbox-caption" class="text-center text-white/90 mt-6 text-xl"></p>
+  </div>
+</div>
+
+<script>
+  function openImage(id) {
+    const images = {
+      1: { src: "https://picsum.photos/id/1015/1400/900", caption: "Фасад общежития вечером" },
+      2: { src: "https://picsum.photos/id/201/1400/900", caption: "Уютная двухместная комната" },
+      3: { src: "https://picsum.photos/id/133/1400/900", caption: "Просторная общая кухня" },
+      4: { src: "https://picsum.photos/id/251/1400/900", caption: "Зона отдыха и общения" },
+      5: { src: "https://picsum.photos/id/866/1400/900", caption: "Современные душевые" },
+      6: { src: "https://picsum.photos/id/1016/1400/900", caption: "Удобная учебная зона" }
+    };
+
+    document.getElementById('lightbox-image').src = images[id].src;
+    document.getElementById('lightbox-caption').textContent = images[id].caption;
+    document.getElementById('lightbox').classList.remove('hidden');
+    document.getElementById('lightbox').classList.add('flex');
+  }
+
+  function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === "Escape") closeLightbox();
+  });
+</script>

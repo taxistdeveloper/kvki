@@ -1,297 +1,352 @@
-<div class="antikorruptsionnyy-kompleks not-prose">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    
+    .doc-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .doc-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.12);
+      border-color: #10b981;
+    }
+    
+    .pdf-icon { transition: all 0.3s ease; }
+    .doc-card:hover .pdf-icon {
+      transform: scale(1.12) rotate(12deg);
+    }
+
+    .modal {
+      animation: modalFade 0.3s ease forwards;
+    }
+    @keyframes modalFade {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+
+
   <!-- Hero -->
-  <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sage-600/15 via-cream-50 to-sage-500/10 border border-cream-200 p-8 lg:p-12 mb-12">
-    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-      <div>
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage-600/15 text-sage-700 text-sm font-semibold mb-4">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Прозрачность и открытость
-        </span>
-        <h1 class="text-3xl lg:text-4xl font-extrabold text-ink-800 tracking-tight mb-3">Антикоррупционный комплекс</h1>
-        <p class="text-ink-600 text-lg max-w-2xl leading-relaxed">
-          Система противодействия коррупции и обеспечения комплаенс-стандартов в КГКП «Карагандинский технико-стройтельный колледж».
-        </p>
-      </div>
-      <div class="hidden lg:flex flex-shrink-0 w-24 h-24 rounded-2xl bg-sage-500/20 items-center justify-center">
-        <svg class="w-12 h-12 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
-      </div>
+  <div class="relative overflow-hidden rounded-2xl bg-white border border-cream-200 shadow-[0_10px_24px_rgba(15,23,42,0.08)] p-8 lg:p-10 mb-10 mx-4 lg:mx-auto max-w-7xl">
+    <div class="relative z-10">
+      <h1 class="text-3xl lg:text-4xl font-extrabold text-ink-800 tracking-tight mb-3">
+        Антикоррупционный комплекс
+      </h1>
+      <p class="text-ink-600 text-lg max-w-2xl leading-relaxed">
+        Система противодействия коррупции и обеспечения комплаенс-стандартов в <strong>Карагандинский высший колледж инжиниринга</strong>.
+      </p>
     </div>
-    <div class="absolute top-0 right-0 w-96 h-96 bg-sage-400/5 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+    <div class="absolute top-0 right-0 w-72 h-72 bg-sage-400/5 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
   </div>
 
-  <!-- Комплаенс офицер жайлы -->
-  <section class="mb-14">
-    <h2 class="text-xl font-bold text-ink-800 mb-6 flex items-center gap-3">
-      <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-sage-500/15 text-sage-600">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-      </span>
-      Комплаенс офицер жайлы
-    </h2>
-    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sage-600/10 via-white to-sage-500/5 border-2 border-sage-400/30 shadow-md hover:shadow-xl hover:border-sage-400/50 transition-all duration-300">
-      <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-sage-600" aria-hidden="true"></div>
-      <div class="flex flex-col sm:flex-row sm:items-center gap-6 p-6 lg:p-8 pl-8">
-        <span class="flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-2xl bg-sage-600 text-white shadow-lg shadow-sage-600/20">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        </span>
-        <div class="flex-1 min-w-0">
-          <p class="text-ink-600 leading-relaxed text-lg">Информация о комплаенс-офицере колледжа, контакты и порядок обращения.</p>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <a href="#" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-sage-600 text-white font-semibold text-sm hover:bg-sage-700 hover:shadow-lg hover:shadow-sage-600/25 transition-all duration-200 active:scale-[0.98]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            Просмотр
-          </a>
-          <a href="#" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-sage-500/50 text-sage-700 font-semibold text-sm hover:bg-sage-500/15 hover:border-sage-500 transition-all duration-200 active:scale-[0.98]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Скачать
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Документы -->
-  <section class="mb-14">
-    <h2 class="text-xl font-bold text-ink-800 mb-2 flex items-center gap-3">
-      <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-sage-500/15 text-sage-600">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-      </span>
-      Нормативные документы
-    </h2>
-    <p class="text-ink-600 mb-8 max-w-2xl">Ознакомьтесь с документами антикоррупционной политики колледжа. Доступны для просмотра и скачивания.</p>
-
-    <div class="grid gap-4 sm:grid-cols-2">
-      <!-- Документ 1 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">ПОЛОЖЕНИЕ об антикоррупционной комплаенс-службе</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-              Просмотр
-            </a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Скачать
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 2 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Кодекс корпоративной этики и поведения преподавателей и работников КГКП «КТСК»</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 3 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Протокол КТСК</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 4 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">АНТИКОРРУПЦИОННАЯ ПОЛИТИКА КГКП «КТСК»</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 5 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Инструкция по противодействию коррупции КГКП</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 6 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Меры по противодействию коррупции</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 7 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">План реализации Антикоррупционной стратегии</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 8 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Политика предотвращения, выявления и урегулирования конфликта интересов</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 9 -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Протокол проведения разъяснительных и обучающих мероприятий</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 10 — казахский -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <span class="inline-block px-2 py-0.5 rounded-md bg-sage-500/15 text-sage-700 text-xs font-medium mb-1">Қазақша</span>
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Сыбайлас жемқорлыққа қарсы комплаенс қызметі туралы ЕРЕЖЕ</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Документ 11 — казахский -->
-      <article class="group relative rounded-2xl bg-white border border-cream-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-sage-400/50 hover:-translate-y-0.5 transition-all duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sage-500 group-hover:w-1.5 group-hover:bg-sage-600 transition-all"></div>
-        <div class="flex flex-col gap-4 p-5 lg:p-6 pl-6">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-sage-500/10 text-sage-600 group-hover:bg-sage-500/20 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            </span>
-            <div class="flex-1 min-w-0">
-              <span class="inline-block px-2 py-0.5 rounded-md bg-sage-500/15 text-sage-700 text-xs font-medium mb-1">Қазақша</span>
-              <h3 class="font-semibold text-ink-800 group-hover:text-sage-700 transition-colors text-[15px] leading-snug">Іс-шара сипаттамасы</h3>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Просмотр</a>
-            <a href="#" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-sage-500/10 text-sage-700 font-medium text-sm hover:bg-sage-500/20 transition-colors">Скачать</a>
-          </div>
-        </div>
-      </article>
+  <section class="max-w-7xl mx-auto px-4 lg:px-8 pb-16">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-ink-800">Официальные документы</h2>
+        <p class="text-ink-600 mt-1">Просмотр и скачивание</p>
+      </div>
+      <input type="text" id="searchInput" 
+             class="w-full sm:w-80 px-5 py-4 rounded-2xl border border-cream-200 focus:border-emerald-300 focus:outline-none text-base"
+             placeholder="🔍 Поиск по названию...">
     </div>
+
+    <ul id="docList" class="space-y-6">
+
+      <!-- 1 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Комплаенс офицер жайлы
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/koplaeans-oficer-zhayly.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/koplaeans-oficer-zhayly.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 2 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            ПОЛОЖЕНИЕ об антикоррупционной комплаенс-службе
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/polozhenie-antikorr-komplaens.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/polozhenie-antikorr-komplaens.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 3 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Кодекс корпоративной этики и поведения преподавателей и работников Карагандинский высший колледж инжиниринга
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/kodeks-korporativnoi-etiki.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/kodeks-korporativnoi-etiki.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 4 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Протокол КВКИ
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/protokoll-ktsk.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/protokoll-ktsk.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 5 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Антикоррупционная политика Карагандинский высший колледж инжиниринга
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/antikorruptsionnaya-politika-ktsk.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/antikorruptsionnaya-politika-ktsk.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 6 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Инструкция по противодействию коррупции
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/instrukciya-po-protivodeystviyu-korrupcii-kommunalnogo-gosudarstvennogo-kazyonnogo-predpriyatiya.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/instrukciya-po-protivodeystviyu-korrupcii-kommunalnogo-gosudarstvennogo-kazyonnogo-predpriyatiya.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 7 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Меры по противодействию коррупции
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/mery-po-protivodeystviyu-korupycii.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/mery-po-protivodeystviyu-korupycii.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 8 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            План реализации Антикоррупционной стратегии
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/plan-realizacii-antikorupcionnoy-strategii.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/plan-realizacii-antikorupcionnoy-strategii.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 9 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Политика предотвращения, выявления и урегулирования конфликта интересов
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/politika-predotvrashcheniya-vyyavleniya-i-uregulirovaniya-konflikta-interesov-kgkp-karagandinskiy-tehniko-stroytelnyy-kolledzh.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/politika-predotvrashcheniya-vyyavleniya-i-uregulirovaniya-konflikta-interesov-kgkp-karagandinskiy-tehniko-stroytelnyy-kolledzh.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 10 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Протокол проведения разъяснительных и обучающих мероприятий
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/protokol-provedenie-razyasnitelnyh-i-obuchayushchih-meropryatiy.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/protokol-provedenie-razyasnitelnyh-i-obuchayushchih-meropryatiy.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 11 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Сыбайлас жемқорлыққа қарсы комплаенс қызметі туралы ЕРЕЖЕ
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('../../storage/anticor/sybaylas-zhemorlya-arsy-komplaens-yzmet-turaly-erezhe.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="../../storage/anticor/sybaylas-zhemorlya-arsy-komplaens-yzmet-turaly-erezhe.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+      <!-- 12 -->
+      <li class="doc-card bg-white border border-cream-200 rounded-3xl p-6 lg:p-8 flex flex-col lg:flex-row gap-6 lg:items-center group">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 pdf-icon">
+          <i class="fa-solid fa-file-pdf text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-xl font-semibold text-ink-800 leading-tight group-hover:text-emerald-700 transition-colors">
+            Іс-шара сипаттамасы
+          </h3>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 lg:w-auto w-full">
+          <button onclick="openPreview('storage/anticor/sybaylas-zhemorlya-arsy-komplaens-yzmet-turaly-erezhe.pdf')" class="btn flex-1 lg:flex-none px-8 py-5 rounded-2xl border border-cream-300 hover:border-emerald-400 hover:text-emerald-700 font-medium flex items-center justify-center gap-2">
+            <i class="fa-solid fa-eye"></i><span>Просмотр</span>
+          </button>
+          <a href="storage/anticor/sybaylas-zhemorlya-arsy-komplaens-yzmet-turaly-erezhe.pdf" download class="btn flex-1 lg:flex-none px-8 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i><span>СКАЧАТЬ</span>
+          </a>
+        </div>
+      </li>
+
+    </ul>
+
+    <p class="text-center text-ink-500 text-sm mt-12">
+      Все документы актуальны на 2026 год и размещены в соответствии с антикоррупционным законодательством Республики Казахстан
+    </p>
   </section>
 
-  <!-- Информационный блок -->
-  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sage-600/15 via-sage-500/5 to-cream-50 border-2 border-sage-500/25 p-8 lg:p-10">
-    <div class="flex flex-col sm:flex-row sm:items-center gap-6">
-      <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-sage-600 flex items-center justify-center shadow-lg shadow-sage-600/25">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+  <!-- Модальное окно -->
+  <div id="previewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+    <div class="modal bg-white w-full max-w-5xl mx-4 rounded-3xl shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between border-b px-6 py-5">
+        <h3 id="modalTitle" class="font-semibold text-lg text-ink-800">Просмотр документа</h3>
+        <button onclick="closePreview()" class="text-3xl text-ink-400 hover:text-ink-600 transition-colors">×</button>
       </div>
-      <div class="flex-1">
-        <h2 class="text-xl font-bold text-ink-800 mb-2">Прозрачность и открытость</h2>
-        <p class="text-ink-600 leading-relaxed">
-          Колледж придерживается принципов прозрачности и открытости в вопросах противодействия коррупции. Все нормативные документы доступны для ознакомления. По вопросам антикоррупционной политики обращайтесь к комплаенс-офицеру.
-        </p>
+      <div class="relative bg-zinc-100" style="height: 82vh;">
+        <iframe id="pdfIframe" class="w-full h-full" frameborder="0"></iframe>
+      </div>
+      <div class="flex items-center justify-end gap-4 px-6 py-4 border-t bg-white">
+        <button onclick="closePreview()" class="px-8 py-3 text-ink-600 hover:bg-zinc-100 rounded-2xl font-medium">Закрыть</button>
+        <a id="modalDownloadBtn" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-semibold flex items-center gap-2">
+          <i class="fa-solid fa-download"></i> Скачать
+        </a>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+
+  <script>
+    function openPreview(url) {
+      document.getElementById('pdfIframe').src = url;
+      document.getElementById('modalDownloadBtn').href = url;
+      document.getElementById('previewModal').classList.remove('hidden');
+      document.getElementById('previewModal').classList.add('flex');
+    }
+
+    function closePreview() {
+      const modal = document.getElementById('previewModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.getElementById('pdfIframe').src = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape") closePreview();
+    });
+
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('#docList li').forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(term) ? '' : 'none';
+      });
+    });
+  </script>

@@ -1,1 +1,150 @@
-<p><br></p>
+<!-- Hero -->
+<div class="relative overflow-hidden rounded-2xl bg-white border border-cream-200 shadow-[0_10px_24px_rgba(15,23,42,0.08)] p-8 lg:p-10 mb-10">
+  <div class="relative z-10">
+    <h1 class="text-3xl lg:text-4xl font-extrabold text-ink-800 tracking-tight mb-3">WorldSkills</h1>
+    <p class="text-ink-600 text-lg max-w-2xl leading-relaxed">
+      Наши студенты достойно представляют колледж на национальном и международном уровне WorldSkills Kazakhstan. 
+      Профессионализм, упорство и золотые руки — вот что мы показываем миру.
+    </p>
+  </div>
+  <div class="absolute top-0 right-0 w-72 h-72 bg-sage-400/5 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+</div>
+
+<!-- WorldSkills Section -->
+<section class="mb-16">
+  <!-- Статистика -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+    <div class="bg-white border border-cream-200 rounded-3xl p-6 text-center">
+      <div class="text-4xl font-bold text-sage-600 mb-1">28</div>
+      <div class="text-ink-600">медалей за 3 года</div>
+    </div>
+    <div class="bg-white border border-cream-200 rounded-3xl p-6 text-center">
+      <div class="text-4xl font-bold text-sage-600 mb-1">14</div>
+      <div class="text-ink-600">золотых медалей</div>
+    </div>
+    <div class="bg-white border border-cream-200 rounded-3xl p-6 text-center">
+      <div class="text-4xl font-bold text-sage-600 mb-1">47</div>
+      <div class="text-ink-600">студентов-участников</div>
+    </div>
+    <div class="bg-white border border-cream-200 rounded-3xl p-6 text-center">
+      <div class="text-4xl font-bold text-sage-600 mb-1">8</div>
+      <div class="text-ink-600">компетенций</div>
+    </div>
+  </div>
+
+  <!-- Фильтры -->
+  <div class="flex flex-wrap gap-3 mb-8">
+    <button onclick="filterWS('all')" class="active-filter px-6 py-3 bg-ink-800 text-white rounded-2xl text-sm font-medium">Все достижения</button>
+    <button onclick="filterWS('gold')" class="px-6 py-3 border border-cream-200 hover:border-sage-300 rounded-2xl text-sm font-medium transition-all">🥇 Золото</button>
+    <button onclick="filterWS('silver')" class="px-6 py-3 border border-cream-200 hover:border-sage-300 rounded-2xl text-sm font-medium transition-all">🥈 Серебро</button>
+    <button onclick="filterWS('bronze')" class="px-6 py-3 border border-cream-200 hover:border-sage-300 rounded-2xl text-sm font-medium transition-all">🥉 Бронза</button>
+  </div>
+
+  <!-- Галерея достижений -->
+  <div id="wsGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Карточки генерируются через JS -->
+  </div>
+</section>
+
+<!-- Video / Highlights -->
+<div class="mt-16">
+  <h2 class="text-2xl font-bold text-ink-800 mb-6">Лучшие моменты WorldSkills</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Можно вставить видео-карточки как в предыдущем блоке -->
+  </div>
+</div>
+
+<script>
+const wsAchievements = [
+  {
+    id: 1,
+    title: "Мехатроника",
+    name: "Айбек Сатыбалды",
+    result: "gold",
+    year: "2025",
+    competition: "WorldSkills Kazakhstan — Национальный финал",
+    thumbnail: "https://picsum.photos/id/1015/600/400",
+    medal: "🥇 Золото"
+  },
+  {
+    id: 2,
+    title: "Веб-дизайн и разработка",
+    name: "Алина Ким",
+    result: "gold",
+    year: "2025",
+    competition: "WorldSkills Kazakhstan",
+    thumbnail: "https://picsum.photos/id/201/600/400",
+    medal: "🥇 Золото"
+  },
+  {
+    id: 3,
+    title: "Поварское дело",
+    name: "Нурлан Ержанов",
+    result: "silver",
+    year: "2024",
+    competition: "WorldSkills Regional",
+    thumbnail: "https://picsum.photos/id/237/600/400",
+    medal: "🥈 Серебро"
+  },
+  {
+    id: 4,
+    title: "Электромонтажные работы",
+    name: "Данил Попов",
+    result: "bronze",
+    year: "2025",
+    competition: "WorldSkills Kazakhstan",
+    thumbnail: "https://picsum.photos/id/133/600/400",
+    medal: "🥉 Бронза"
+  },
+  // Добавляй новые достижения сюда
+];
+
+function createWSCard(item) {
+  const card = document.createElement('div');
+  card.className = `group bg-white border border-cream-200 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 ws-card`;
+  card.dataset.result = item.result;
+
+  card.innerHTML = `
+    <div class="relative">
+      <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+      <div class="absolute top-4 right-4 bg-white px-4 py-1 rounded-2xl text-xl shadow-md">${item.medal}</div>
+    </div>
+    <div class="p-6">
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-sage-600">${item.year}</span>
+          <h3 class="font-semibold text-xl text-ink-800 mt-1">${item.title}</h3>
+        </div>
+      </div>
+      <p class="text-ink-600 font-medium">${item.name}</p>
+      <p class="text-ink-500 text-sm mt-1">${item.competition}</p>
+    </div>
+  `;
+  return card;
+}
+
+function renderWS(filteredItems) {
+  const gallery = document.getElementById('wsGallery');
+  gallery.innerHTML = '';
+  filteredItems.forEach(item => {
+    gallery.appendChild(createWSCard(item));
+  });
+}
+
+function filterWS(type) {
+  document.querySelectorAll('button').forEach(btn => btn.classList.remove('active-filter'));
+  event.currentTarget.classList.add('active-filter');
+
+  if (type === 'all') {
+    renderWS(wsAchievements);
+  } else {
+    const filtered = wsAchievements.filter(item => item.result === type);
+    renderWS(filtered);
+  }
+}
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', () => {
+  renderWS(wsAchievements);
+});
+</script>
