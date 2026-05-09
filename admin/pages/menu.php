@@ -15,7 +15,7 @@ try {
 // Системные страницы (не из БД): Главная, Объявления
 $systemPages = [
     ['id' => 0, 'slug' => 'index', 'title' => 'Главная'],
-    ['id' => 0, 'slug' => 'ob-yavleniya', 'title' => 'Объявления'],
+    ['id' => 0, 'slug' => ANNOUNCEMENTS_SLUG, 'title' => 'Объявления'],
 ];
 $pages = array_merge($systemPages, $pages);
 
@@ -183,7 +183,7 @@ function renderMenuTreeRecursive(array $items, string $pathPrefix, int $level, a
         $slug = htmlspecialchars($item['slug'] ?? '');
         $url = htmlspecialchars($item['url'] ?? '');
         $pathBase = str_replace('-', '][children][', $path);
-        $slugInPages = in_array($slug, ['index', 'ob-yavleniya']) || in_array($slug, array_column($pages, 'slug'));
+        $slugInPages = in_array($slug, ['index', ANNOUNCEMENTS_SLUG, ANNOUNCEMENTS_SLUG_LEGACY], true) || in_array($slug, array_column($pages, 'slug'));
 
         $indent = $level * 20;
         $hasChildren = !empty($children);

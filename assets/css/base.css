@@ -15,6 +15,11 @@
   --shadow-soft: 0 2px 4px rgba(15,23,42,0.05), 0 12px 28px rgba(15,23,42,0.09);
   --shadow-card: 0 4px 10px rgba(15,23,42,0.08), 0 18px 38px rgba(15,23,42,0.12);
   --shadow-float: 0 10px 30px rgba(0,0,0,0.10);
+  /* Бренд сайта (синхрон с sage / #1f59b0 в шаблонах) */
+  --kvki-brand: #1f59b0;
+  --kvki-brand-soft: rgba(31, 89, 176, 0.12);
+  --kvki-ink: #263544;
+  --kvki-muted: #516272;
 }
 
 *,

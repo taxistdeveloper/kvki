@@ -7,6 +7,11 @@
 
 define('ROOT_PATH', dirname(__DIR__));
 define('BASE_URL', '/kvki');
+/** Slug раздела «Объявления» в адресе сайта */
+define('ANNOUNCEMENTS_SLUG', 'obyavleniya');
+/** Устаревший вариант — редирект 301 на ANNOUNCEMENTS_SLUG */
+define('ANNOUNCEMENTS_SLUG_LEGACY', 'ob-yavleniya');
+
 define('SITE_NAME', 'КГКП Карагандинский высший колледж инжиниринга');
 define('SITE_DESCRIPTION', 'Образовательное учреждение технического профиля');
 

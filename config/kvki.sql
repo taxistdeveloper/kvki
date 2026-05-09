@@ -64,7 +64,7 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `date`, `title`, `url`, `excerpt`, `is_important`, `sort_order`, `created_at`, `views`) VALUES
-(7, '16.03.2026', 'Тестовый', '/ob-yavleniya/testovyy', 'тестовый', 1, 0, '2026-03-16 11:20:08', 20);
+(7, '16.03.2026', 'Тестовый', '/obyavleniya/testovyy', 'тестовый', 1, 0, '2026-03-16 11:20:08', 20);
 
 -- --------------------------------------------------------
 

@@ -8,19 +8,33 @@ try {
 
     $slug = $router->getPageSlug();
 
-    // Проверка объявлений: ob-yavleniya или ob-yavleniya/{slug}
+    // Канонический URL объявлений: /obyavleniya (редирект со старого /ob-yavleniya)
+    if ($slug === ANNOUNCEMENTS_SLUG_LEGACY || str_starts_with($slug, ANNOUNCEMENTS_SLUG_LEGACY . '/')) {
+        $target = $slug === ANNOUNCEMENTS_SLUG_LEGACY
+            ? ANNOUNCEMENTS_SLUG
+            : ANNOUNCEMENTS_SLUG . substr($slug, strlen(ANNOUNCEMENTS_SLUG_LEGACY));
+        header('Location: ' . rtrim(BASE_URL, '/') . '/' . $target, true, 301);
+        exit;
+    }
+
+    // Проверка объявлений: obyavleniya или obyavleniya/{slug} (в БД могут остаться старые пути /ob-yavleniya/…)
     $announcementItem = null;
-    $isAnnouncementList = ($slug === 'ob-yavleniya');
-    $isAnnouncementSingle = (str_starts_with($slug, 'ob-yavleniya/') && substr_count($slug, '/') >= 1);
+    $isAnnouncementList = ($slug === ANNOUNCEMENTS_SLUG);
+    $isAnnouncementSingle = (str_starts_with($slug, ANNOUNCEMENTS_SLUG . '/') && substr_count($slug, '/') >= 1);
     if ($db = Database::tryGetInstance()) {
         if ($isAnnouncementSingle) {
-            $annSlug = substr($slug, strlen('ob-yavleniya/'));
-            $stmt = $db->prepare('SELECT * FROM announcements WHERE url = ? OR url = ?');
-            $stmt->execute(['/ob-yavleniya/' . $annSlug, 'ob-yavleniya/' . $annSlug]);
+            $annSlug = substr($slug, strlen(ANNOUNCEMENTS_SLUG . '/'));
+            $stmt = $db->prepare('SELECT * FROM announcements WHERE url IN (?,?,?,?)');
+            $stmt->execute([
+                '/' . ANNOUNCEMENTS_SLUG . '/' . $annSlug,
+                ANNOUNCEMENTS_SLUG . '/' . $annSlug,
+                '/' . ANNOUNCEMENTS_SLUG_LEGACY . '/' . $annSlug,
+                ANNOUNCEMENTS_SLUG_LEGACY . '/' . $annSlug,
+            ]);
             $announcementItem = $stmt->fetch();
         }
         // Обратная совместимость: объявления с URL без префикса (например /priem-dokumentov)
-        if (!$announcementItem && strpos($slug, '/') === false && $slug !== 'ob-yavleniya') {
+        if (!$announcementItem && strpos($slug, '/') === false && !in_array($slug, [ANNOUNCEMENTS_SLUG, ANNOUNCEMENTS_SLUG_LEGACY], true)) {
             $stmt = $db->prepare('SELECT * FROM announcements WHERE url = ? OR url = ?');
             $stmt->execute(['/' . $slug, $slug]);
             $announcementItem = $stmt->fetch();
@@ -54,11 +68,11 @@ try {
     if ($announcementItem) {
         $pageTitle = $announcementItem['title'] . ' — ' . SITE_NAME;
         $metaDescription = $announcementItem['excerpt'] ?: SITE_DESCRIPTION;
-        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Объявления', 'slug' => 'ob-yavleniya'], ['title' => $announcementItem['title'], 'slug' => $slug]];
+        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Объявления', 'slug' => ANNOUNCEMENTS_SLUG], ['title' => $announcementItem['title'], 'slug' => $slug]];
     } elseif ($isAnnouncementList) {
         $pageTitle = 'Объявления — ' . SITE_NAME;
         $metaDescription = 'Важная информация для студентов и абитуриентов. ' . SITE_DESCRIPTION;
-        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Объявления', 'slug' => 'ob-yavleniya']];
+        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Объявления', 'slug' => ANNOUNCEMENTS_SLUG]];
     } else {
         $pageTitle = ($pageData['title'] ?? (is_array($lastBreadcrumb) ? $lastBreadcrumb['title'] : $lastBreadcrumb)) . ' — ' . SITE_NAME;
         $metaDescription = $pageData['meta_description'] ?? SITE_DESCRIPTION;
@@ -88,6 +102,7 @@ try {
         $listHtml = '';
         foreach ($listRows as $r) {
             $url = (str_starts_with($r['url'], 'http') || str_starts_with($r['url'], BASE_URL)) ? $r['url'] : (BASE_URL . (str_starts_with($r['url'], '/') ? $r['url'] : '/' . $r['url']));
+            $url = str_replace('/' . ANNOUNCEMENTS_SLUG_LEGACY . '/', '/' . ANNOUNCEMENTS_SLUG . '/', $url);
             $views = (int)($r['views'] ?? 0);
             $listHtml .= '<a href="' . htmlspecialchars($url) . '" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6 mb-4">'
                 . '<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">'
@@ -417,7 +432,7 @@ try {
                         <?php endforeach; ?>
                     </div>
                     <div class="mt-10">
-                        <a href="<?= BASE_URL ?>/ob-yavleniya" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
+                        <a href="<?= BASE_URL ?>/<?= ANNOUNCEMENTS_SLUG ?>" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
                             Все объявления
                             <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

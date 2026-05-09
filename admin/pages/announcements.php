@@ -39,9 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete'])) {
     $date = trim($_POST['date'] ?? '');
     $title = trim($_POST['title'] ?? '');
     $url = trim($_POST['url'] ?? '');
+    $url = str_replace('/' . ANNOUNCEMENTS_SLUG_LEGACY . '/', '/' . ANNOUNCEMENTS_SLUG . '/', $url);
     if (empty($url) && !empty($title)) {
         $slug = slugFromTitle($title);
-        $url = '/ob-yavleniya/' . ($slug !== '' ? $slug : 'announcement-' . time());
+        $url = '/' . ANNOUNCEMENTS_SLUG . '/' . ($slug !== '' ? $slug : 'announcement-' . time());
     }
     $excerpt = trim($_POST['excerpt'] ?? '');
     $important = isset($_POST['is_important']) ? 1 : 0;
@@ -160,9 +161,9 @@ $showForm = $item || ($segments[1] ?? '') === 'new' || $formError;
         if (titleInput && urlInput) {
             urlInput.addEventListener('input', function() { urlManuallyEdited = true; });
             titleInput.addEventListener('input', function() {
-                if (!urlManuallyEdited) urlInput.value = '/ob-yavleniya/' + slugify(titleInput.value);
+                if (!urlManuallyEdited) urlInput.value = <?= json_encode('/' . ANNOUNCEMENTS_SLUG . '/') ?> + slugify(titleInput.value);
             });
-            if (!urlInput.value && titleInput.value) urlInput.value = '/ob-yavleniya/' + slugify(titleInput.value);
+            if (!urlInput.value && titleInput.value) urlInput.value = <?= json_encode('/' . ANNOUNCEMENTS_SLUG . '/') ?> + slugify(titleInput.value);
         }
     })();
     </script>
