@@ -28,6 +28,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   scrollbar-width: thin;
   scrollbar-color: #1f59b0 #f5f5f5;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html {
+    overflow-x: hidden;
+  }
 }
 
 /* WebKit (Chrome, Safari, Edge) */
@@ -55,6 +62,19 @@ body {
   font-family: var(--font-sans);
   line-height: 1.65;
   text-rendering: optimizeLegibility;
+  min-width: 0;
+}
+
+/* Медиа из контента страниц не выходят за ширину экрана (SVG-иконки не трогаем — у них свои размеры в разметке) */
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+main {
+  min-width: 0;
 }
 
 /* Унифицированные тени (как “карточки” на примере) */

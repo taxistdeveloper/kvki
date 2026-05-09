@@ -20,7 +20,41 @@
   .kvki-title-wrap { max-width: 64rem; }
 }
 
-.prose { max-width: 70ch; }
+.prose {
+  max-width: 70ch;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.prose pre,
+.page-article__content.prose pre {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose iframe,
+.page-article__content.prose iframe,
+.prose video,
+.page-article__content.prose video {
+  max-width: 100%;
+}
+
+.prose :where(table),
+.page-article__content.prose :where(table) {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.prose :where(th),
+.prose :where(td),
+.page-article__content.prose :where(th),
+.page-article__content.prose :where(td) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .prose h1 { font-size: 1.625rem; font-weight: 800; color: #263544; margin-top: 2.25rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
 .prose h2 { font-size: 1.3125rem; font-weight: 800; color: #263544; margin-top: 1.75rem; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
 .prose h3 { font-size: 1.125rem; font-weight: 800; color: #3a4b5a; margin-top: 1.25rem; margin-bottom: 0.5rem; }
@@ -104,4 +138,23 @@
 .e-resource-card:hover {
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.11);
   border-color: rgba(31, 89, 176, 0.18);
+}
+
+/* Узкие экраны: заголовки и текст в теле страниц чуть компактнее */
+@media (max-width: 639px) {
+  .prose h1 {
+    font-size: 1.375rem;
+  }
+  .prose h2 {
+    font-size: 1.1875rem;
+  }
+  .prose h3 {
+    font-size: 1.0625rem;
+  }
+  .page-article__content.prose h1 {
+    font-size: 1.5rem;
+  }
+  .page-article__content.prose h2 {
+    font-size: 1.125rem;
+  }
 }

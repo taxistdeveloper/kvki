@@ -89,15 +89,16 @@ try {
         foreach ($listRows as $r) {
             $url = (str_starts_with($r['url'], 'http') || str_starts_with($r['url'], BASE_URL)) ? $r['url'] : (BASE_URL . (str_starts_with($r['url'], '/') ? $r['url'] : '/' . $r['url']));
             $views = (int)($r['views'] ?? 0);
-            $listHtml .= '<a href="' . htmlspecialchars($url) . '" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-6 py-5 mb-4">'
-                . '<div class="flex items-center gap-5">'
-                . '<div class="shrink-0 w-24"><time class="text-xs text-ink-600 font-semibold">' . htmlspecialchars($r['date']) . '</time><div class="text-[11px] text-ink-500 mt-1">' . $views . ' просмотров</div></div>'
+            $listHtml .= '<a href="' . htmlspecialchars($url) . '" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6 mb-4">'
+                . '<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">'
+                . '<div class="flex shrink-0 items-center justify-between gap-3 sm:block sm:w-24"><div><time class="text-xs text-ink-600 font-semibold">' . htmlspecialchars($r['date']) . '</time><div class="text-[11px] text-ink-500 mt-1">' . $views . ' просмотров</div></div>'
+                . '<svg class="w-5 h-5 text-ink-400 shrink-0 self-center sm:hidden group-hover:text-sage-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>'
                 . '<div class="flex-1 min-w-0">'
-                . '<div class="flex items-center gap-2 min-w-0">'
-                . ($r['is_important'] ? '<span class="inline-flex px-2 py-0.5 text-[11px] font-semibold rounded-full bg-sage-600 text-white">Важно</span>' : '')
-                . '<h3 class="font-semibold text-ink-800 leading-snug truncate group-hover:text-sage-600 transition-colors">' . htmlspecialchars($r['title']) . '</h3></div>'
-                . '<p class="text-ink-600 text-sm mt-1 truncate">' . htmlspecialchars($r['excerpt']) . '</p></div>'
-                . '<svg class="w-5 h-5 text-ink-400 shrink-0 group-hover:text-sage-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>'
+                . '<div class="flex flex-wrap items-center gap-2 min-w-0">'
+                . ($r['is_important'] ? '<span class="inline-flex px-2 py-0.5 text-[11px] font-semibold rounded-full bg-sage-600 text-white shrink-0">Важно</span>' : '')
+                . '<h3 class="font-semibold text-ink-800 leading-snug line-clamp-2 sm:truncate group-hover:text-sage-600 transition-colors min-w-0">' . htmlspecialchars($r['title']) . '</h3></div>'
+                . '<p class="text-ink-600 text-sm mt-1 line-clamp-3 sm:truncate">' . htmlspecialchars($r['excerpt']) . '</p></div>'
+                . '<svg class="w-5 h-5 text-ink-400 shrink-0 hidden sm:block group-hover:text-sage-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>'
                 . '</div></a>';
         }
         $pageContent = '<div class="space-y-4"><p class="text-ink-600 mb-8">Важная информация для студентов и абитуриентов</p>' . ($listHtml ?: '<p class="text-ink-600">Объявлений пока нет.</p>') . '</div>';
@@ -388,22 +389,27 @@ try {
                     </div>
                     <div class="space-y-4">
                         <?php foreach ($announcements as $item): ?>
-                            <a href="<?= htmlspecialchars($item['url']) ?>" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-6 py-5">
-                                <div class="flex items-center gap-5">
-                                    <div class="shrink-0 w-24">
-                                        <time class="text-xs text-ink-600 font-semibold"><?= htmlspecialchars($item['date']) ?></time>
-                                        <div class="text-[11px] text-ink-500 mt-1"><?= (int)($item['views'] ?? 0) ?> просмотров</div>
+                            <a href="<?= htmlspecialchars($item['url']) ?>" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6">
+                                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+                                    <div class="flex shrink-0 items-center justify-between gap-3 sm:block sm:w-24">
+                                        <div>
+                                            <time class="text-xs text-ink-600 font-semibold"><?= htmlspecialchars($item['date']) ?></time>
+                                            <div class="text-[11px] text-ink-500 mt-1"><?= (int)($item['views'] ?? 0) ?> просмотров</div>
+                                        </div>
+                                        <svg class="w-5 h-5 text-ink-400 shrink-0 self-center sm:hidden group-hover:text-sage-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <div class="flex items-center gap-2 min-w-0">
-                                            <?php if (!empty($item['important'])): ?><span class="inline-flex px-2 py-0.5 text-[11px] font-semibold rounded-full bg-sage-600 text-white">Важно</span><?php endif; ?>
-                                            <h3 class="font-bold text-ink-800 leading-snug truncate group-hover:text-sage-600 transition-colors">
+                                        <div class="flex flex-wrap items-center gap-2 min-w-0">
+                                            <?php if (!empty($item['important'])): ?><span class="inline-flex shrink-0 px-2 py-0.5 text-[11px] font-semibold rounded-full bg-sage-600 text-white">Важно</span><?php endif; ?>
+                                            <h3 class="font-bold text-ink-800 leading-snug line-clamp-2 sm:truncate min-w-0 group-hover:text-sage-600 transition-colors">
                                                 <?= htmlspecialchars($item['title']) ?>
                                             </h3>
                                         </div>
-                                        <p class="text-ink-600 text-sm mt-1 truncate"><?= htmlspecialchars($item['excerpt']) ?></p>
+                                        <p class="text-ink-600 text-sm mt-1 line-clamp-3 sm:truncate"><?= htmlspecialchars($item['excerpt']) ?></p>
                                     </div>
-                                    <svg class="w-5 h-5 text-ink-400 shrink-0 group-hover:text-sage-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 text-ink-400 shrink-0 hidden sm:block group-hover:text-sage-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </div>
@@ -511,9 +517,9 @@ try {
             </section>
         <?php else: ?>
             <!-- Внутренние страницы (без сайдбара — полная ширина контента) -->
-            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+            <div class="max-w-screen-2xl mx-auto px-5 sm:px-8 lg:px-10 py-16 lg:py-24 min-w-0">
                 <div class="min-w-0">
-                    <div class="p-8 lg:p-12 rounded-3xl bg-cream-50 border border-cream-200 max-w-full">
+                    <div class="page-article-card p-6 sm:p-8 lg:p-12 rounded-3xl bg-cream-50 border border-cream-200 max-w-full min-w-0">
                         <div class="prose prose-lg max-w-none"><?= str_replace('{{BASE_URL}}', BASE_URL, $pageContent ?? '') ?></div>
                     </div>
                     <?php if (in_array($slug, ['stroitelnoe-tekhnicheskoe-otdelenie', 'arkhitektury-dizayna-i-dekorativno-prikladnogo-iskusstva', 'professionalno-tekhnicheskie'], true)): ?>

@@ -130,12 +130,12 @@
   visibility: visible;
   transform: translateY(0);
 }
+/* На мобильных и планшетах — только на десктопе (как нижняя навигация, брейкпоинт xl) */
 @media (max-width: 1279px) {
   .scroll-to-top {
-    bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 12px);
-    right: 1rem;
-    width: 44px;
-    height: 44px;
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
   }
 }
 @media (min-width: 1280px) {

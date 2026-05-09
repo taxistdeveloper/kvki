@@ -27,6 +27,11 @@
 /* Карта в футере — анимированный маркер колледжа */
 #footer-map {
   min-height: 12rem;
+  max-width: 100%;
+}
+
+#footer-map .leaflet-container {
+  max-width: 100%;
 }
 .footer-map-marker-container {
   background: none !important;

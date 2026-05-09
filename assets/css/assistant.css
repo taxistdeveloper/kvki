@@ -373,9 +373,18 @@
     height: 1.1rem;
 }
 
-/* Мобильная нижняя навигация — сдвигаем кнопку выше */
+/* Десктоп: кнопка чуть выше при нижней навигации (на ширинах с has-mobile-nav не показываем виджет) */
 .has-mobile-nav .kvki-assistant-toggle {
     bottom: 4.5rem;
+}
+
+/* Мобильная и планшетная версия — виджет только на компьютере (≥1280px), как основное меню */
+@media (max-width: 1279px) {
+    .kvki-assistant {
+        display: none !important;
+        pointer-events: none;
+        visibility: hidden;
+    }
 }
 
 @media (max-width: 480px) {

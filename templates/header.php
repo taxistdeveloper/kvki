@@ -174,8 +174,8 @@ $headerAboutLinks = HeaderSettings::getAboutLinks();
         <!-- Основной header -->
         <div class="header-main-wrap w-full pb-3 pt-2">
             <div class="header-main-panel w-full px-4 sm:px-6 lg:px-8 rounded-2xl bg-white shadow-lg border border-cream-200/70">
-                <div class="relative flex items-center justify-center h-16 lg:h-20 w-full">
-                    <div class="flex items-center justify-center gap-6 xl:gap-10">
+                <div class="relative flex items-center justify-center h-16 lg:h-20 w-full min-w-0">
+                    <div class="flex items-center justify-center gap-3 sm:gap-6 xl:gap-10 min-w-0 max-w-full pr-14 xl:pr-0">
                     <a href="<?= BASE_URL ?>/" class="flex items-center gap-3 group shrink-0">
                         <div class="flex items-center justify-center rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 ring-1 ring-cream-200/60 p-0.5 min-w-[48px] min-h-[48px] lg:min-w-[56px] lg:min-h-[56px]">
                             <?php $logoFile = file_exists(ROOT_PATH . '/assets/images/logo/logo-50.png') ? 'logo-50.png' : (file_exists(ROOT_PATH . '/assets/images/logo/logo-50.svg') ? 'logo-50.svg' : null); ?>

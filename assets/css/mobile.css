@@ -79,12 +79,30 @@
     padding-bottom: calc(var(--mobile-nav-height) + var(--safe-area-bottom) + 16px);
   }
 
-  /* Горизонтальные safe area для контента (вырезы, жесты) — только safe-area, максимум ширины */
+  /* Горизонтальные отступы контента + safe-area (не перетираем «в ноль» классы px-* из Tailwind) */
   main .max-w-6xl,
   main .max-w-7xl,
   main .max-w-screen-2xl {
-    padding-left: var(--safe-area-left);
-    padding-right: var(--safe-area-right);
+    padding-left: calc(1rem + var(--safe-area-left));
+    padding-right: calc(1rem + var(--safe-area-right));
+  }
+
+  @media (min-width: 640px) {
+    main .max-w-6xl,
+    main .max-w-7xl,
+    main .max-w-screen-2xl {
+      padding-left: calc(1.5rem + var(--safe-area-left));
+      padding-right: calc(1.5rem + var(--safe-area-right));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    main .max-w-6xl,
+    main .max-w-7xl,
+    main .max-w-screen-2xl {
+      padding-left: calc(2rem + var(--safe-area-left));
+      padding-right: calc(2rem + var(--safe-area-right));
+    }
   }
 
   /* Компактный header на мобильных */
@@ -111,9 +129,10 @@
   }
 
   .hero-slider h1 {
-    font-size: 1.75rem !important;
+    font-size: clamp(1.375rem, 5vw, 1.75rem) !important;
     line-height: 1.2 !important;
     margin-bottom: 1rem !important;
+    overflow-wrap: anywhere;
   }
 
   .hero-slider p {
@@ -166,17 +185,30 @@
     font-size: 1.75rem;
   }
 
-  /* Контент страницы — меньше padding, больше ширина */
+  /* Контент страницы — комфортные отступы с учётом safe-area */
   .p-8.lg\\:p-12,
-  .page-article-card.p-8 {
-    padding: 1.25rem 0.25rem !important;
+  .page-article-card {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: calc(1rem + var(--safe-area-left)) !important;
+    padding-right: calc(1rem + var(--safe-area-right)) !important;
   }
 
-  /* Карточка директора — минимальные боковые отступы */
+  @media (min-width: 640px) {
+    .p-8.lg\\:p-12,
+    .page-article-card {
+      padding-top: 1.75rem !important;
+      padding-bottom: 1.75rem !important;
+      padding-left: calc(1.25rem + var(--safe-area-left)) !important;
+      padding-right: calc(1.25rem + var(--safe-area-right)) !important;
+    }
+  }
+
+  /* Карточка директора — достаточные боковые отступы */
   .blog-direktor .p-6.lg\\:p-10,
   .blog-direktor .p-8.lg\\:p-10 {
-    padding-left: 0.375rem !important;
-    padding-right: 0.375rem !important;
+    padding-left: calc(1rem + var(--safe-area-left)) !important;
+    padding-right: calc(1rem + var(--safe-area-right)) !important;
   }
 
   /* Сайдбар — скрыть на мобильных */
@@ -252,10 +284,17 @@
     border-radius: 1rem;
   }
 
-  /* Обёртка блога директора — без боковых отступов, максимум ширины */
+  /* Обёртка блога директора — те же боковые отступы, что и у остального контента */
   .p-8.lg\\:p-12:has(.blog-direktor) {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding-left: calc(1rem + var(--safe-area-left)) !important;
+    padding-right: calc(1rem + var(--safe-area-right)) !important;
+  }
+
+  @media (min-width: 640px) {
+    .p-8.lg\\:p-12:has(.blog-direktor) {
+      padding-left: calc(1.25rem + var(--safe-area-left)) !important;
+      padding-right: calc(1.25rem + var(--safe-area-right)) !important;
+    }
   }
 
   .blog-direktor .flex.flex-col.lg\\:flex-row {
@@ -322,6 +361,13 @@
     height: 12px;
   }
 
+  /* Swiper: не даём слайдеру раздувать страницу по горизонтали */
+  .hero-swiper,
+  .partners-swiper {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
   @media (max-width: 480px) {
     .e-resource-page h1 {
       font-size: 1.25rem !important;
@@ -331,7 +377,7 @@
       font-size: 0.75rem !important;
     }
 
-    /* 6 пунктов в нижней навигации — чуть компактнее на очень маленьких экранах */
+    /* 5 пунктов в нижней навигации — чуть компактнее на очень маленьких экранах */
     .mobile-bottom-nav__item span {
       font-size: 10px;
     }
