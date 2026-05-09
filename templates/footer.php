@@ -163,9 +163,9 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
             <span>e-Resource</span>
         </a>
-        <a href="<?= BASE_URL ?>/novosti" class="mobile-bottom-nav__item<?= ($navSlug === 'novosti' || str_starts_with($navSlug, 'novosti/')) ? ' mobile-bottom-nav__item--active' : '' ?>">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
-            <span>Новости</span>
+        <a href="<?= BASE_URL ?>/o-nas" class="mobile-bottom-nav__item<?= ($navSlug === 'o-nas' || str_starts_with($navSlug, 'o-nas/')) ? ' mobile-bottom-nav__item--active' : '' ?>">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            <span>О колледже</span>
         </a>
         <a href="<?= BASE_URL ?>/ob-yavleniya" class="mobile-bottom-nav__item<?= ($navSlug === 'ob-yavleniya' || str_starts_with($navSlug, 'ob-yavleniya/')) ? ' mobile-bottom-nav__item--active' : '' ?>">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
@@ -396,29 +396,49 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
                 const postUrl = payload.postUrl || '';
                 const postImage = payload.postImage || '';
 
-                if (type === 'demo') {
+                modalContent.innerHTML = '';
+                if (postImage) {
                     const wrapper = document.createElement('div');
                     wrapper.className = 'space-y-4';
-
-                    if (postImage) {
-                        const image = document.createElement('img');
-                        image.src = postImage;
-                        image.alt = 'Пост Instagram';
-                        image.className = 'w-full rounded-2xl object-cover max-h-[70vh]';
-                        wrapper.appendChild(image);
-                    }
-
+                    const image = document.createElement('img');
+                    image.src = postImage;
+                    image.alt = 'Пост Instagram';
+                    image.className = 'w-full rounded-2xl object-cover max-h-[70vh]';
+                    image.referrerPolicy = 'no-referrer-when-downgrade';
+                    image.addEventListener('error', function onImgErr() {
+                        image.removeEventListener('error', onImgErr);
+                        image.remove();
+                        const embedUrl = buildEmbedUrl(postUrl);
+                        if (embedUrl) {
+                            const iframe = document.createElement('iframe');
+                            iframe.src = embedUrl;
+                            iframe.className = 'w-full rounded-2xl border border-black/10';
+                            iframe.style.minHeight = '520px';
+                            iframe.loading = 'lazy';
+                            iframe.setAttribute('allowfullscreen', '');
+                            wrapper.insertBefore(iframe, wrapper.firstChild);
+                        }
+                    }, { once: true });
+                    wrapper.appendChild(image);
                     if (caption) {
                         const text = document.createElement('p');
                         text.className = 'text-ink-700 leading-relaxed whitespace-pre-line';
                         text.textContent = caption;
                         wrapper.appendChild(text);
                     }
-                    modalContent.innerHTML = '';
+                    modalContent.appendChild(wrapper);
+                } else if (type === 'demo') {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'space-y-4';
+                    if (caption) {
+                        const text = document.createElement('p');
+                        text.className = 'text-ink-700 leading-relaxed whitespace-pre-line';
+                        text.textContent = caption;
+                        wrapper.appendChild(text);
+                    }
                     modalContent.appendChild(wrapper);
                 } else {
                     const embedUrl = buildEmbedUrl(postUrl);
-                    modalContent.innerHTML = '';
                     if (embedUrl) {
                         const wrapper = document.createElement('div');
                         wrapper.className = 'w-full';

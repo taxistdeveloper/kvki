@@ -117,7 +117,7 @@ CREATE TABLE `footer_settings` (
 INSERT INTO `footer_settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 (1, 'footer_address', 'ул. Кирпичная 8, г. Караганда, Казахстан', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
 (2, 'footer_email', 'info@kvki.kz', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
-(3, 'footer_about_links', '[{\"title\":\"О нас\",\"url\":\"/o-nas\"},{\"title\":\"История колледжа\",\"url\":\"/istoriya-kolledzha\"},{\"title\":\"Вакансии\",\"url\":\"/trudoustroystva\"},{\"title\":\"Новости\",\"url\":\"/novosti\"},{\"title\":\"Галерея\",\"url\":\"/o-nas\"}]', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
+(3, 'footer_about_links', '[{\"title\":\"О нас\",\"url\":\"/o-nas\"},{\"title\":\"История колледжа\",\"url\":\"/istoriya-kolledzha\"},{\"title\":\"Вакансии\",\"url\":\"/trudoustroystva\"},{\"title\":\"Галерея\",\"url\":\"/o-nas\"}]', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
 (4, 'footer_admission_links', '[{\"title\":\"Список документов\",\"url\":\"/kak-podat-dokumenty-na-postuplenie-v-kolledzh-onlayn\"},{\"title\":\"Специальности\",\"url\":\"/spetsialnosti\"},{\"title\":\"Правила приёма\",\"url\":\"/pravila-priema\"},{\"title\":\"Обратная связь\",\"url\":\"/o-nas\"}]', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
 (5, 'footer_anticor_title', 'Антикоррупционный комплекс', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),
 (6, 'footer_anticor_links', '[{\"title\":\"Картограмма коррупции\",\"url\":\"/kartogramma-korruptsii\"},{\"title\":\"Контакты антикора\",\"url\":\"/antikorruptsionnyy-kompleks\"}]', '2026-03-17 09:16:08', '2026-03-17 09:16:08'),

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS footer_settings (
 INSERT INTO footer_settings (`key`, `value`) VALUES
 ('footer_address', 'ул. Кирпичная 8, г. Караганда, Казахстан'),
 ('footer_email', 'info@kvki.kz'),
-('footer_about_links', '[{"title":"О нас","url":"/o-nas"},{"title":"История колледжа","url":"/istoriya-kolledzha"},{"title":"Вакансии","url":"/trudoustroystva"},{"title":"Новости","url":"/novosti"},{"title":"Галерея","url":"/o-nas"}]'),
+('footer_about_links', '[{"title":"О нас","url":"/o-nas"},{"title":"История колледжа","url":"/istoriya-kolledzha"},{"title":"Вакансии","url":"/trudoustroystva"},{"title":"Галерея","url":"/o-nas"}]'),
 ('footer_admission_links', '[{"title":"Список документов","url":"/kak-podat-dokumenty-na-postuplenie-v-kolledzh-onlayn"},{"title":"Специальности","url":"/spetsialnosti"},{"title":"Правила приёма","url":"/pravila-priema"},{"title":"Обратная связь","url":"/o-nas"}]'),
 ('footer_anticor_title', 'Антикоррупционный комплекс'),
 ('footer_anticor_links', '[{"title":"Картограмма коррупции","url":"/kartogramma-korruptsii"},{"title":"Контакты антикора","url":"/antikorruptsionnyy-kompleks"}]'),

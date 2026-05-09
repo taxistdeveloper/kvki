@@ -28,30 +28,13 @@ try {
         }
     }
 
-    // Проверка новостей: novosti или novosti/{slug}
-    $newsItem = null;
-    $isNewsList = ($slug === 'novosti');
-    $isNewsSingle = (str_starts_with($slug, 'novosti/') && substr_count($slug, '/') >= 1);
-    if ($db = Database::tryGetInstance()) {
-        try {
-            if ($isNewsSingle) {
-                $newsSlug = substr($slug, strlen('novosti/'));
-                $stmt = $db->prepare('SELECT * FROM news WHERE slug = ? AND (is_active = 1 OR is_active IS NULL)');
-                $stmt->execute([$newsSlug]);
-                $newsItem = $stmt->fetch();
-            }
-        } catch (PDOException $e) {}
-    }
-
-    // Проверка существования страницы: в меню, файл контента, запись в БД, объявление или новость
+    // Проверка существования страницы: в меню, файл контента, запись в БД или объявление
     $pageExists = ($slug === 'index')
         || $menu->isPathInMenu($slug)
         || (Page::getContentFromFile($slug) !== null)
         || ($page->findBySlug($slug) !== null)
         || $isAnnouncementList
-        || ($announcementItem !== null)
-        || $isNewsList
-        || ($newsItem !== null);
+        || ($announcementItem !== null);
 
     if (!$pageExists) {
         http_response_code(404);
@@ -76,21 +59,13 @@ try {
         $pageTitle = 'Объявления — ' . SITE_NAME;
         $metaDescription = 'Важная информация для студентов и абитуриентов. ' . SITE_DESCRIPTION;
         $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Объявления', 'slug' => 'ob-yavleniya']];
-    } elseif ($newsItem) {
-        $pageTitle = $newsItem['title'] . ' — ' . SITE_NAME;
-        $metaDescription = $newsItem['excerpt'] ?: SITE_DESCRIPTION;
-        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Новости', 'slug' => 'novosti'], ['title' => $newsItem['title'], 'slug' => $slug]];
-    } elseif ($isNewsList) {
-        $pageTitle = 'Новости — ' . SITE_NAME;
-        $metaDescription = 'Новости колледжа. ' . SITE_DESCRIPTION;
-        $breadcrumbTitles = [['title' => 'Главная', 'slug' => ''], ['title' => 'Новости', 'slug' => 'novosti']];
     } else {
         $pageTitle = ($pageData['title'] ?? (is_array($lastBreadcrumb) ? $lastBreadcrumb['title'] : $lastBreadcrumb)) . ' — ' . SITE_NAME;
         $metaDescription = $pageData['meta_description'] ?? SITE_DESCRIPTION;
     }
 
     // PHP-шаблон (content/pages/{slug}.php) — сливается с сайтом через page-layout
-    if ($slug !== 'index' && Page::hasTemplateFile($slug) && !$announcementItem && !$isAnnouncementList && !$newsItem && !$isNewsList) {
+    if ($slug !== 'index' && Page::hasTemplateFile($slug) && !$announcementItem && !$isAnnouncementList) {
         $templateFile = Page::getTemplateFilePath($slug);
         require $templateFile;
         return;
@@ -107,23 +82,6 @@ try {
             . '<h1 class="text-2xl font-bold text-ink-800 mb-6">' . htmlspecialchars($announcementItem['title']) . '</h1>'
             . ($announcementItem['excerpt'] ? '<div class="prose prose-lg text-ink-600">' . nl2br(htmlspecialchars($announcementItem['excerpt'])) . '</div>' : '')
             . '</article>';
-    } elseif ($newsItem) {
-        if ($db = Database::tryGetInstance()) {
-            try {
-                $db->prepare('UPDATE news SET views = COALESCE(views, 0) + 1 WHERE id = ?')->execute([$newsItem['id']]);
-            } catch (PDOException $e) {}
-        }
-        $newsItem['views'] = (int)($newsItem['views'] ?? 0) + 1;
-        $pageContent = ''; // Рендерится через news-article.php
-    } elseif ($isNewsList) {
-        $db = Database::tryGetInstance();
-        $listRows = [];
-        if ($db) {
-            try {
-                $listRows = $db->query('SELECT `date`, title, slug, excerpt, image_url, COALESCE(views, 0) AS views FROM news WHERE is_active = 1 OR is_active IS NULL ORDER BY created_at DESC, id DESC')->fetchAll();
-            } catch (PDOException $e) {}
-        }
-        $pageContent = ''; // Рендерится через news-list.php
     } elseif ($isAnnouncementList) {
         $db = Database::tryGetInstance();
         $listRows = $db ? $db->query('SELECT `date`, title, url, excerpt, is_important, COALESCE(views, 0) AS views FROM announcements ORDER BY sort_order, id')->fetchAll() : [];
@@ -146,15 +104,26 @@ try {
     }
 
     // Посты Instagram из админки (ссылки на посты для embed)
-    $instagramProfileUrl = 'https://www.instagram.com/ktsk.kz';
+    $instagramProfileUrl = 'https://www.instagram.com/kvki.kz';
     $instagramPosts = [];
     if ($db = Database::tryGetInstance()) {
         try {
-            $rows = $db->query('SELECT post_url, caption FROM instagram_posts ORDER BY sort_order, id')->fetchAll();
+            $rows = $db->query('SELECT post_url, caption, media_url, thumb_local FROM instagram_posts ORDER BY sort_order, id')->fetchAll();
             if (!empty($rows)) {
-                $instagramPosts = array_map(fn($r) => ['url' => $r['post_url'], 'caption' => $r['caption'] ?? ''], $rows);
+                $instagramPosts = array_map(static function ($r) {
+                    $local = isset($r['thumb_local']) ? trim((string) $r['thumb_local']) : '';
+                    $image = $local !== ''
+                        ? (BASE_URL . '/' . str_replace('\\', '/', ltrim($local, '/')))
+                        : (string) ($r['media_url'] ?? '');
+                    return [
+                        'url' => $r['post_url'],
+                        'caption' => $r['caption'] ?? '',
+                        'image' => $image,
+                    ];
+                }, $rows);
             }
-        } catch (PDOException $e) {}
+        } catch (PDOException $e) {
+        }
     }
     // Демо-карточки Instagram на случай, когда посты из админки ещё не добавлены
     $instagramImagesPath = ROOT_PATH . '/assets/images/instagram';
@@ -181,7 +150,7 @@ try {
     $instagramDemoPosts = [
         ['url' => $instagramProfileUrl, 'caption' => 'Учебные будни и практические занятия студентов КВКИ.', 'image' => $instagramImage(1)],
         ['url' => $instagramProfileUrl, 'caption' => 'Мероприятия, конкурсы и проекты колледжа.', 'image' => $instagramImage(2)],
-        ['url' => $instagramProfileUrl, 'caption' => 'Новости, достижения и жизнь колледжа каждый день.', 'image' => $instagramImage(3)],
+        ['url' => $instagramProfileUrl, 'caption' => 'Анонсы, достижения и жизнь колледжа каждый день.', 'image' => $instagramImage(3)],
         ['url' => $instagramProfileUrl, 'caption' => 'Производственная практика и реальные кейсы в обучении.', 'image' => $instagramImage(4)],
         ['url' => $instagramProfileUrl, 'caption' => 'Творческие работы студентов архитектуры и дизайна.', 'image' => $instagramImage(5)],
         ['url' => $instagramProfileUrl, 'caption' => 'Победы в конкурсах, олимпиадах и спортивных мероприятиях.', 'image' => $instagramImage(6)],
@@ -348,7 +317,7 @@ try {
                             <div class="bg-white rounded-[28px] shadow-soft border border-black/5 px-6 py-5 flex items-center gap-4">
                                 <div class="w-12 h-12 rounded-full bg-sage-600 text-white flex items-center justify-center shrink-0">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                     </svg>
                                 </div>
                                 <div class="min-w-0">
@@ -435,7 +404,7 @@ try {
                                         <p class="text-ink-600 text-sm mt-1 truncate"><?= htmlspecialchars($item['excerpt']) ?></p>
                                     </div>
                                     <svg class="w-5 h-5 text-ink-400 shrink-0 group-hover:text-sage-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </div>
                             </a>
@@ -454,103 +423,7 @@ try {
 
 
             <!-- INSTAGRAM -->
-            <section class="py-20 lg:py-24 bg-cream-200/50">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="kvki-title-wrap">
-                        <h2 class="kvki-title text-3xl sm:text-4xl mb-3">Instagram</h2>
-                        <p class="kvki-subtitle text-base sm:text-lg mb-12">Подписывайтесь на нас <a href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="text-sage-600 font-semibold hover:underline">@ktsk.kz</a></p>
-                    </div>
-                    <?php if (!empty($instagramPosts)): ?>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 instagram-embed-grid">
-                            <?php foreach ($instagramPosts as $idx => $post): ?>
-                                <div class="instagram-embed-wrapper js-instagram-item flex justify-center"<?= $idx >= 6 ? ' style="display:none;"' : '' ?>>
-                                    <a
-                                        href="<?= htmlspecialchars($post['url']) ?>"
-                                        class="js-instagram-open block w-full max-w-sm p-6 rounded-2xl bg-gradient-to-br from-pink-50 to-purple-50 border border-cream-200 hover:border-pink-300 hover:shadow-lg transition-all text-center"
-                                        data-post-type="embed"
-                                        data-post-url="<?= htmlspecialchars($post['url']) ?>"
-                                        data-post-caption="<?= htmlspecialchars($post['caption'] ?? '') ?>"
-                                    >
-                                        <svg class="w-12 h-12 mx-auto mb-3 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-                                        <span class="text-sage-700 font-semibold">Открыть пост</span>
-                                        <?php if (!empty($post['caption'])): ?><p class="text-ink-500 text-sm mt-2 line-clamp-2"><?= htmlspecialchars(mb_substr($post['caption'], 0, 80)) ?><?= mb_strlen($post['caption']) > 80 ? '…' : '' ?></p><?php endif; ?>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 instagram-embed-grid">
-                            <?php foreach ($instagramDemoPosts as $idx => $post): ?>
-                                <a
-                                    href="<?= htmlspecialchars($post['url']) ?>"
-                                    class="js-instagram-open js-instagram-item group block rounded-3xl overflow-hidden bg-white border border-black/5 shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all"
-                                    data-post-type="demo"
-                                    data-post-url="<?= htmlspecialchars($post['url']) ?>"
-                                    data-post-image="<?= htmlspecialchars($post['image'] ?? '') ?>"
-                                    data-post-caption="<?= htmlspecialchars($post['caption'] ?? '') ?>"
-                                    <?= $idx >= 6 ? ' style="display:none;"' : '' ?>
-                                >
-                                    <div class="aspect-square bg-cream-100">
-                                        <?php if (!empty($post['image'])): ?>
-                                            <img src="<?= htmlspecialchars($post['image']) ?>" alt="Демо публикация Instagram" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="p-5">
-                                        <div class="flex items-center gap-2 font-semibold text-sm mb-2" style="color: #253f50;">
-                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-                                            @ktsk.kz
-                                        </div>
-                                        <p class="text-ink-600 text-sm leading-relaxed"><?= htmlspecialchars($post['caption']) ?></p>
-                                    </div>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="mt-10">
-                        <?php if ($instagramItemsCount > 6): ?>
-                        <button type="button" id="instagram-show-more" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
-                            Посмотреть еще
-                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                        <a id="instagram-view-all-link" href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800" style="display:none;">
-                            Посмотреть все
-                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                        <?php else: ?>
-                        <a href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
-                            Посмотреть все
-                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </section>
-            <div id="instagram-post-modal" class="fixed inset-0 z-[100] hidden" aria-hidden="true">
-                <div class="absolute inset-0 bg-black/70" data-instagram-modal-close></div>
-                <div class="relative w-full h-full p-4 sm:p-6 lg:p-10 overflow-y-auto">
-                    <div class="max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden shadow-2xl">
-                        <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-black/10">
-                            <h3 class="text-lg sm:text-xl font-bold text-ink-800">Публикация Instagram</h3>
-                            <button type="button" class="w-10 h-10 rounded-xl border border-black/10 hover:bg-black/5 text-ink-600 flex items-center justify-center" data-instagram-modal-close aria-label="Закрыть">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                            </button>
-                        </div>
-                        <div id="instagram-modal-content" class="p-5 sm:p-6"></div>
-                        <div class="px-5 sm:px-6 pb-6 flex justify-end">
-                            <a id="instagram-modal-link" href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white" style="background-color: #253f50;">
-                                Открыть в Instagram
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php require __DIR__ . '/templates/instagram-section.php'; ?>
 
             <!-- Наши партнеры -->
             <section class="py-20 lg:py-24 bg-gradient-to-b from-sage-50/60 to-cream-100">
@@ -580,7 +453,9 @@ try {
                                             <h3 class="font-bold text-ink-800 text-center text-sm lg:text-base group-hover:text-sage-700 transition-colors"><?= htmlspecialchars($partner['name']) ?></h3>
                                             <span class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-sage-600 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 Перейти на сайт
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
                                             </span>
                                         </div>
                                     </a>
@@ -602,40 +477,38 @@ try {
                         <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
                             <a href="<?= BASE_URL ?>/abiturientam/pravila-priema" class="group flex flex-col p-7 rounded-[28px] bg-white border border-black/5 shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300">
                                 <div class="w-12 h-12 rounded-2xl bg-sage-600/10 text-sage-600 flex items-center justify-center mb-5 group-hover:bg-sage-600/15 transition-colors">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
                                 </div>
                                 <h3 class="font-bold text-sage-600 text-xl mb-2 transition-colors">Правила приёма</h3>
                                 <p class="text-ink-600 text-sm mb-4 flex-1">Список документов, сроки и порядок подачи</p>
                                 <span class="inline-flex items-center gap-2 text-sage-600 font-semibold text-sm group-hover:gap-3 transition-all">
                                     Подробнее
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </span>
                             </a>
                             <a href="<?= BASE_URL ?>/abiturientam/informatsiya" class="group flex flex-col p-7 rounded-[28px] bg-white border border-black/5 shadow-soft hover:shadow-card hover:border-sage-600/40 transition-all duration-300">
                                 <div class="w-12 h-12 rounded-2xl bg-sage-600/10 text-sage-600 flex items-center justify-center mb-5 group-hover:bg-sage-600/15 transition-colors">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                 </div>
                                 <h3 class="font-bold text-ink-800 text-lg mb-1 group-hover:text-sage-700 transition-colors">Информация</h3>
                                 <p class="text-ink-600 text-sm mb-4 flex-1">Полезные сведения для абитуриентов</p>
                                 <span class="inline-flex items-center gap-2 text-sage-600 font-semibold text-sm group-hover:gap-3 transition-all">
                                     Подробнее
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
                                 </span>
                             </a>
                         </div>
                     </div>
                 </div>
             </section>
-        <?php elseif ($newsItem): ?>
-            <!-- Статья новости -->
-            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-                <?php require __DIR__ . '/templates/news-article.php'; ?>
-            </div>
-        <?php elseif ($isNewsList): ?>
-            <!-- Список новостей -->
-            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
-                <?php require __DIR__ . '/templates/news-list.php'; ?>
-            </div>
         <?php else: ?>
             <!-- Внутренние страницы (без сайдбара — полная ширина контента) -->
             <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
@@ -684,15 +557,14 @@ try {
                                     $embedUrl = $buildInstagramEmbedUrl($postUrl);
                                     $postType = !empty($image) ? 'demo' : 'embed';
                                     ?>
-                                    <article class="js-dept-instagram-item rounded-2xl border border-cream-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition"<?= $idx >= 6 ? ' style="display:none;"' : '' ?>>
+                                    <article class="js-dept-instagram-item rounded-2xl border border-cream-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition" <?= $idx >= 6 ? ' style="display:none;"' : '' ?>>
                                         <button
                                             type="button"
                                             class="js-instagram-open w-full text-left"
                                             data-post-type="<?= htmlspecialchars($postType) ?>"
                                             data-post-url="<?= htmlspecialchars($postUrl ?: $instagramProfileUrl) ?>"
                                             data-post-image="<?= htmlspecialchars($image) ?>"
-                                            data-post-caption="<?= htmlspecialchars($caption) ?>"
-                                        >
+                                            data-post-caption="<?= htmlspecialchars($caption) ?>">
                                             <?php if (!empty($image)): ?>
                                                 <div class="aspect-square bg-cream-100">
                                                     <img src="<?= htmlspecialchars($image) ?>" alt="Публикация Instagram" class="w-full h-full object-cover">
@@ -700,7 +572,9 @@ try {
                                             <?php else: ?>
                                                 <div class="aspect-square bg-gradient-to-br from-pink-50 to-purple-100 flex items-center justify-center">
                                                     <div class="text-center px-6">
-                                                        <svg class="w-14 h-14 mx-auto mb-3 text-pink-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
+                                                        <svg class="w-14 h-14 mx-auto mb-3 text-pink-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z" />
+                                                        </svg>
                                                         <p class="text-ink-700 text-base font-semibold">Смотреть пост</p>
                                                     </div>
                                                 </div>
@@ -716,8 +590,7 @@ try {
                                                 data-post-type="<?= htmlspecialchars($postType) ?>"
                                                 data-post-url="<?= htmlspecialchars($postUrl ?: $instagramProfileUrl) ?>"
                                                 data-post-image="<?= htmlspecialchars($image) ?>"
-                                                data-post-caption="<?= htmlspecialchars($caption) ?>"
-                                            >
+                                                data-post-caption="<?= htmlspecialchars($caption) ?>">
                                                 Просмотр в окне
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -733,8 +606,7 @@ try {
                                         type="button"
                                         id="dept-instagram-toggle"
                                         data-state="collapsed"
-                                        class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 py-3 rounded-xl border border-cream-200 bg-white text-sage-700 text-base font-semibold hover:border-sage-300 hover:bg-sage-50 transition-colors"
-                                    >
+                                        class="inline-flex items-center justify-center gap-2 min-h-[52px] px-6 py-3 rounded-xl border border-cream-200 bg-white text-sage-700 text-base font-semibold hover:border-sage-300 hover:bg-sage-50 transition-colors">
                                         <span>Показать больше</span>
                                         <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -749,14 +621,18 @@ try {
                                         <div class="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-black/10">
                                             <h3 class="text-lg sm:text-xl font-bold text-ink-800">Публикация Instagram</h3>
                                             <button type="button" class="w-10 h-10 rounded-xl border border-black/10 hover:bg-black/5 text-ink-600 flex items-center justify-center" data-instagram-modal-close aria-label="Закрыть">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
                                             </button>
                                         </div>
                                         <div id="instagram-modal-content" class="p-5 sm:p-6"></div>
                                         <div class="px-5 sm:px-6 pb-6 flex justify-end">
                                             <a id="instagram-modal-link" href="<?= htmlspecialchars($instagramProfileUrl) ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-white" style="background-color: #253f50;">
                                                 Открыть в Instagram
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                </svg>
                                             </a>
                                         </div>
                                     </div>

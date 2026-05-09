@@ -12,7 +12,7 @@ $err = [];
 try {
     $db->exec("CREATE TABLE IF NOT EXISTS instagram_settings (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        access_token VARCHAR(500) NOT NULL,
+        access_token TEXT NOT NULL,
         ig_user_id VARCHAR(50) NOT NULL,
         last_sync_at TIMESTAMP NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -29,6 +29,28 @@ try {
 } catch (PDOException $e) {
     if (strpos($e->getMessage(), 'Duplicate column') !== false) {
         $ok[] = 'Колонка source уже существует';
+    } else {
+        $err[] = $e->getMessage();
+    }
+}
+
+try {
+    $db->exec('ALTER TABLE instagram_posts ADD COLUMN media_url TEXT DEFAULT NULL');
+    $ok[] = 'Колонка media_url добавлена в instagram_posts';
+} catch (PDOException $e) {
+    if (strpos($e->getMessage(), 'Duplicate column') !== false) {
+        $ok[] = 'Колонка media_url уже существует';
+    } else {
+        $err[] = $e->getMessage();
+    }
+}
+
+try {
+    $db->exec('ALTER TABLE instagram_posts ADD COLUMN thumb_local VARCHAR(512) DEFAULT NULL');
+    $ok[] = 'Колонка thumb_local добавлена (локальные превью Instagram)';
+} catch (PDOException $e) {
+    if (strpos($e->getMessage(), 'Duplicate column') !== false) {
+        $ok[] = 'Колонка thumb_local уже существует';
     } else {
         $err[] = $e->getMessage();
     }

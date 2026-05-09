@@ -22,10 +22,15 @@ if (!$settings) exit('No API settings');
 
 $posts = InstagramApi::fetchMedia($settings['access_token'], $settings['ig_user_id'], 12);
 $db->prepare('DELETE FROM instagram_posts WHERE source = ?')->execute(['api']);
-$stmt = $db->prepare('INSERT INTO instagram_posts (post_url, caption, sort_order, source) VALUES (?,?,?,?)');
+$stmt = $db->prepare('INSERT INTO instagram_posts (post_url, caption, media_url, thumb_local, sort_order, source) VALUES (?,?,?,?,?,?)');
 foreach ($posts as $i => $p) {
     $caption = $p['caption'] ? mb_substr($p['caption'], 0, 500) : null;
-    $stmt->execute([$p['post_url'], $caption, $i, 'api']);
+    $mediaUrl = !empty($p['media_url']) ? $p['media_url'] : null;
+    $thumbLocal = null;
+    if (!empty($p['ig_media_id']) && $mediaUrl) {
+        $thumbLocal = InstagramApi::cacheThumbnail($mediaUrl, (string) $p['ig_media_id']);
+    }
+    $stmt->execute([$p['post_url'], $caption, $mediaUrl, $thumbLocal, $i, 'api']);
 }
 $db->prepare('UPDATE instagram_settings SET last_sync_at = NOW() WHERE id = ?')->execute([$settings['id']]);
 

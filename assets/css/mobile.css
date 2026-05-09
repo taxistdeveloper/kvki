@@ -184,19 +184,6 @@
     display: none !important;
   }
 
-  /* Новости — карточки вертикально */
-  .news-list .flex.flex-col.sm\\:flex-row {
-    flex-direction: column;
-  }
-
-  .news-list .sm\\:w-72 {
-    width: 100% !important;
-  }
-
-  .news-list .aspect-video.sm\\:aspect-square {
-    aspect-ratio: 16/9;
-  }
-
   /* Footer — компактнее */
   footer .grid {
     gap: 2rem;

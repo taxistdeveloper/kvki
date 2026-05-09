@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['api_action'])) {
         $igUserId = trim($_POST['ig_user_id'] ?? '');
         if ($token && $igUserId) {
             // Пробуем получить Page Access Token (для API media нужен именно он)
-            $result = InstagramApi::getInstagramIdFromToken($token);
+            $fbPageId = trim($_POST['facebook_page_id'] ?? '');
+            $result = InstagramApi::getInstagramIdFromToken($token, $fbPageId !== '' ? $fbPageId : null);
             $accessToken = ($result && !empty($result['page_access_token'])) ? $result['page_access_token'] : $token;
             $igId = ($result && !empty($result['ig_user_id'])) ? $result['ig_user_id'] : $igUserId;
             try {
@@ -41,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['api_action'])) {
     } elseif ($_POST['api_action'] === 'discover') {
         $token = trim($_POST['access_token'] ?? '');
         if ($token) {
-            $result = InstagramApi::getInstagramIdFromToken($token);
+            $fbPageId = trim($_POST['facebook_page_id'] ?? '');
+            $result = InstagramApi::getInstagramIdFromToken($token, $fbPageId !== '' ? $fbPageId : null);
             if ($result && !empty($result['page_access_token'])) {
                 // Сохраняем Page Access Token (не User token!) — для API media нужен именно он
                 try {
@@ -73,10 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['api_action'])) {
             }
             try {
                 $db->prepare('DELETE FROM instagram_posts WHERE source = ?')->execute(['api']);
-                $stmt = $db->prepare('INSERT INTO instagram_posts (post_url, caption, sort_order, source) VALUES (?,?,?,?)');
+                $stmt = $db->prepare('INSERT INTO instagram_posts (post_url, caption, media_url, thumb_local, sort_order, source) VALUES (?,?,?,?,?,?)');
                 foreach ($posts as $i => $p) {
                     $caption = $p['caption'] ? mb_substr($p['caption'], 0, 500) : null;
-                    $stmt->execute([$p['post_url'], $caption, $i, 'api']);
+                    $mediaUrl = !empty($p['media_url']) ? $p['media_url'] : null;
+                    $thumbLocal = null;
+                    if (!empty($p['ig_media_id']) && $mediaUrl) {
+                        $thumbLocal = InstagramApi::cacheThumbnail($mediaUrl, (string) $p['ig_media_id']);
+                    }
+                    $stmt->execute([$p['post_url'], $caption, $mediaUrl, $thumbLocal, $i, 'api']);
                 }
                 $db->prepare('UPDATE instagram_settings SET last_sync_at = NOW() WHERE id = ?')->execute([$apiSettings['id']]);
                 $apiMessage = 'success:Загружено ' . count($posts) . ' постов.';
@@ -220,12 +227,18 @@ $msg = $_GET['msg'] ?? '';
                         <label class="block text-sm font-medium text-ink-700 mb-1">User Access Token</label>
                         <input type="password" name="access_token" value="<?= htmlspecialchars($_GET['token'] ?? '') ?>" placeholder="EAAx..." required
                             class="w-full px-4 py-2.5 border border-cream-200 rounded-xl text-sm" autocomplete="off">
-                        <p class="text-xs text-ink-500 mt-1">Graph API Explorer → «Пользователь или Страница»: выберите <strong>вашу Facebook-страницу</strong> (не «Маркер пользователя»). Права: instagram_basic, pages_show_list. Нажмите «Generate Access Token».</p>
+                        <p class="text-xs text-ink-500 mt-1">Graph API Explorer: <strong>маркер пользователя</strong>, права <code class="text-xs">instagram_basic</code>, <code class="text-xs">pages_show_list</code>, <code class="text-xs">pages_read_engagement</code>. В окне «Вход для компаний» отметьте нужную Page.</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-ink-700 mb-1">ID Facebook-страницы <span class="font-normal text-ink-500">(если «Подключить» без него не находит Instagram)</span></label>
+                        <input type="text" name="facebook_page_id" value="" placeholder="например 2244378165611202" pattern="\d*"
+                            class="w-full px-4 py-2.5 border border-cream-200 rounded-xl text-sm" autocomplete="off">
+                        <p class="text-xs text-ink-500 mt-1">Тот же числовой ID, что в запросе <code class="text-xs">graph.facebook.com/v…/СЮДА?fields=instagram_business_account</code>, когда прямой запрос в Explorer работает, а <code class="text-xs">me/accounts</code> пустой.</p>
                     </div>
                     <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-600 text-white font-medium rounded-xl hover:bg-sage-700 shadow-md shadow-sage-600/25 transition-all">Подключить</button>
                 </form>
                 <p class="mt-4 text-xs text-ink-500">
-                    <strong>Инструкция:</strong> 1) Создайте приложение на <a href="https://developers.facebook.com/" target="_blank" class="text-sage-600">developers.facebook.com</a>. 2) Добавьте продукт «Instagram Graph API». 3) Подключите Instagram Business к Facebook Page. 4) В Graph API Explorer получите токен с правами instagram_basic, pages_show_list. 5) Вставьте токен и нажмите «Подключить».
+                    <strong>Инструкция:</strong> 1) Приложение на <a href="https://developers.facebook.com/" target="_blank" class="text-sage-600">developers.facebook.com</a> и продукт Instagram. 2) Instagram Business к Facebook Page. 3) Токен из Explorer + при необходимости ID страницы. 4) «Подключить».
                 </p>
             <?php endif; ?>
         </div>

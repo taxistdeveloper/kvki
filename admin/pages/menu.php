@@ -12,10 +12,9 @@ try {
     $db = Database::getInstance();
     $pages = $db->query('SELECT id, slug, title FROM pages WHERE is_active = 1 ORDER BY slug')->fetchAll();
 } catch (PDOException $e) {}
-// Системные страницы (не из БД): Главная, Новости, Объявления
+// Системные страницы (не из БД): Главная, Объявления
 $systemPages = [
     ['id' => 0, 'slug' => 'index', 'title' => 'Главная'],
-    ['id' => 0, 'slug' => 'novosti', 'title' => 'Новости'],
     ['id' => 0, 'slug' => 'ob-yavleniya', 'title' => 'Объявления'],
 ];
 $pages = array_merge($systemPages, $pages);
@@ -184,7 +183,7 @@ function renderMenuTreeRecursive(array $items, string $pathPrefix, int $level, a
         $slug = htmlspecialchars($item['slug'] ?? '');
         $url = htmlspecialchars($item['url'] ?? '');
         $pathBase = str_replace('-', '][children][', $path);
-        $slugInPages = in_array($slug, ['index', 'novosti', 'ob-yavleniya']) || in_array($slug, array_column($pages, 'slug'));
+        $slugInPages = in_array($slug, ['index', 'ob-yavleniya']) || in_array($slug, array_column($pages, 'slug'));
 
         $indent = $level * 20;
         $hasChildren = !empty($children);

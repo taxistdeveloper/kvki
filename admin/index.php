@@ -43,9 +43,6 @@ switch ($action) {
     case 'announcements':
         require __DIR__ . '/pages/announcements.php';
         break;
-    case 'news':
-        require __DIR__ . '/pages/news.php';
-        break;
     case 'slides':
         require __DIR__ . '/pages/slides.php';
         break;

@@ -32,24 +32,6 @@ CREATE TABLE IF NOT EXISTS hero_slides (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Новости
-CREATE TABLE IF NOT EXISTS news (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) NOT NULL UNIQUE,
-    excerpt TEXT,
-    content LONGTEXT,
-    `date` VARCHAR(20) NOT NULL,
-    image_url VARCHAR(500) DEFAULT NULL,
-    views INT UNSIGNED DEFAULT 0,
-    is_active TINYINT(1) DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_slug (slug),
-    INDEX idx_date (date),
-    INDEX idx_active (is_active)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- Партнёры
 CREATE TABLE IF NOT EXISTS partners (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -94,6 +76,8 @@ CREATE TABLE IF NOT EXISTS instagram_posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     post_url VARCHAR(500) NOT NULL,
     caption VARCHAR(500) DEFAULT NULL,
+    media_url TEXT DEFAULT NULL,
+    thumb_local VARCHAR(512) DEFAULT NULL,
     sort_order INT DEFAULT 0,
     source VARCHAR(20) DEFAULT 'manual',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -103,7 +87,7 @@ CREATE TABLE IF NOT EXISTS instagram_posts (
 -- Настройки Instagram API (автосинхронизация)
 CREATE TABLE IF NOT EXISTS instagram_settings (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    access_token VARCHAR(500) NOT NULL,
+    access_token TEXT NOT NULL,
     ig_user_id VARCHAR(50) NOT NULL,
     last_sync_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -150,7 +134,7 @@ CREATE TABLE IF NOT EXISTS footer_settings (
 INSERT INTO footer_settings (`key`, `value`) VALUES
 ('footer_address', 'ул. Кирпичная 8, г. Караганда, Казахстан'),
 ('footer_email', 'info@kvki.kz'),
-('footer_about_links', '[{"title":"О нас","url":"/o-nas"},{"title":"История колледжа","url":"/istoriya-kolledzha"},{"title":"Вакансии","url":"/trudoustroystva"},{"title":"Новости","url":"/novosti"},{"title":"Галерея","url":"/o-nas"}]'),
+('footer_about_links', '[{"title":"О нас","url":"/o-nas"},{"title":"История колледжа","url":"/istoriya-kolledzha"},{"title":"Вакансии","url":"/trudoustroystva"},{"title":"Галерея","url":"/o-nas"}]'),
 ('footer_admission_links', '[{"title":"Список документов","url":"/kak-podat-dokumenty-na-postuplenie-v-kolledzh-onlayn"},{"title":"Специальности","url":"/spetsialnosti"},{"title":"Правила приёма","url":"/pravila-priema"},{"title":"Обратная связь","url":"/o-nas"}]'),
 ('footer_anticor_title', 'Антикоррупционный комплекс'),
 ('footer_anticor_links', '[{"title":"Картограмма коррупции","url":"/kartogramma-korruptsii"},{"title":"Контакты антикора","url":"/antikorruptsionnyy-kompleks"}]'),
