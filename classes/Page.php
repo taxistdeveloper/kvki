@@ -82,20 +82,33 @@ class Page
         return null;
     }
 
-    public function findBySlug(string $slug): ?array
+    /**
+     * Запись в БД по slug (любой is_active) — для админки «скрыть страницу» и проверки существования URL.
+     */
+    public function findRowBySlug(string $slug): ?array
     {
         $db = $this->getDb();
         if (!$db) {
             return null;
         }
         try {
-            $stmt = $db->prepare('SELECT * FROM pages WHERE slug = ? AND is_active = 1');
+            $stmt = $db->prepare('SELECT * FROM pages WHERE slug = ?');
             $stmt->execute([$slug]);
             $result = $stmt->fetch();
             return $result ?: null;
         } catch (PDOException $e) {
             return null;
         }
+    }
+
+    /** Только опубликованная страница (для контента из БД) */
+    public function findBySlug(string $slug): ?array
+    {
+        $row = $this->findRowBySlug($slug);
+        if (!$row || !(int)($row['is_active'] ?? 0)) {
+            return null;
+        }
+        return $row;
     }
 
     public function getContent(string $slug): string

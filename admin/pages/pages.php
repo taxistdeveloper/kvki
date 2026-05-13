@@ -8,6 +8,21 @@ $formError = '';
 $subAction = $segments[1] ?? 'list';
 $editId = isset($segments[1]) && is_numeric($segments[1]) ? (int)$segments[1] : null;
 
+// Быстрое включение / отключение страницы
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_id'])) {
+    $toggleId = (int)$_POST['toggle_id'];
+    $toggleActive = isset($_POST['toggle_active']) ? (int)$_POST['toggle_active'] : 0;
+    if ($toggleId > 0) {
+        try {
+            $db->prepare('UPDATE pages SET is_active = ? WHERE id = ?')->execute([$toggleActive, $toggleId]);
+        } catch (PDOException $e) {
+            // игнорируем — редирект всё равно произойдёт
+        }
+    }
+    header('Location: ' . ADMIN_URL . '/pages');
+    exit;
+}
+
 // Обработка удаления
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     $deleteId = (int)$_POST['delete_id'];
@@ -280,6 +295,25 @@ $showForm = $page || $isNew || !empty($formError);
                             </td>
                             <td class="px-6 py-3 text-right">
                                 <a href="<?= ADMIN_URL ?>/pages/<?= $p['id'] ?>" class="inline-flex items-center gap-1.5 px-3 py-2 text-sage-600 hover:bg-sage-50 rounded-lg text-sm font-medium transition-colors">Редактировать</a>
+                                <?php if ($p['is_active']): ?>
+                                <form method="post" class="inline" title="Скрыть страницу — посетители увидят «в разработке»">
+                                    <input type="hidden" name="toggle_id" value="<?= $p['id'] ?>">
+                                    <input type="hidden" name="toggle_active" value="0">
+                                    <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-2 text-amber-600 hover:bg-amber-50 rounded-lg text-sm font-medium transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+                                        Скрыть
+                                    </button>
+                                </form>
+                                <?php else: ?>
+                                <form method="post" class="inline" title="Включить страницу — станет доступна посетителям">
+                                    <input type="hidden" name="toggle_id" value="<?= $p['id'] ?>">
+                                    <input type="hidden" name="toggle_active" value="1">
+                                    <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-2 text-sage-600 hover:bg-sage-50 rounded-lg text-sm font-medium transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        Включить
+                                    </button>
+                                </form>
+                                <?php endif; ?>
                                 <form method="post" class="inline" onsubmit="return confirm(<?= json_encode('Удалить «' . $p['title'] . '»?', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) ?>);">
                                     <input type="hidden" name="delete_id" value="<?= $p['id'] ?>">
                                     <button type="submit" class="inline-flex items-center gap-1.5 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium transition-colors">Удалить</button>

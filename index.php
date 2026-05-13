@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config/config.php';
+require_once ROOT_PATH . '/admin/auth.php';
 
 try {
     $menu = new Menu();
@@ -46,7 +47,7 @@ try {
     $pageExists = ($slug === 'index')
         || $menu->isPathInMenu($slug)
         || (Page::getContentFromFile($slug) !== null)
-        || ($page->findBySlug($slug) !== null)
+        || ($page->findRowBySlug($slug) !== null)
         || $isAnnouncementList
         || ($announcementItem !== null);
 
@@ -60,7 +61,19 @@ try {
         return;
     }
 
-    $pageData = $page->findBySlug($slug);
+    $pageRow = $page->findRowBySlug($slug);
+    $pageIsPublished = $pageRow && (int)($pageRow['is_active'] ?? 0);
+    $adminPreview = adminIsLoggedIn();
+
+    // Страница отключена в админке → «в разработке» (админу показываем как на сайте)
+    if ($pageRow && !$pageIsPublished && $slug !== 'index' && !$adminPreview) {
+        $pageData = $pageRow;
+        require __DIR__ . '/templates/under-construction.php';
+        return;
+    }
+
+    $pageData = ($pageRow && ($pageIsPublished || $adminPreview)) ? $pageRow : null;
+
     $breadcrumbTitles = $router->getBreadcrumbFromPath();
     $lastBreadcrumb = end($breadcrumbTitles);
 
@@ -104,7 +117,7 @@ try {
             $url = (str_starts_with($r['url'], 'http') || str_starts_with($r['url'], BASE_URL)) ? $r['url'] : (BASE_URL . (str_starts_with($r['url'], '/') ? $r['url'] : '/' . $r['url']));
             $url = str_replace('/' . ANNOUNCEMENTS_SLUG_LEGACY . '/', '/' . ANNOUNCEMENTS_SLUG . '/', $url);
             $views = (int)($r['views'] ?? 0);
-            $listHtml .= '<a href="' . htmlspecialchars($url) . '" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6 mb-4">'
+            $listHtml .= '<a href="' . htmlspecialchars($url) . '" data-announcement-modal data-announcement-title="' . htmlspecialchars($r['title'], ENT_QUOTES) . '" data-announcement-date="' . htmlspecialchars($r['date'], ENT_QUOTES) . '" data-announcement-excerpt="' . htmlspecialchars($r['excerpt'], ENT_QUOTES) . '" data-announcement-views="' . $views . '" data-announcement-important="' . ($r['is_important'] ? '1' : '0') . '" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6 mb-4">'
                 . '<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">'
                 . '<div class="flex shrink-0 items-center justify-between gap-3 sm:block sm:w-24"><div><time class="text-xs text-ink-600 font-semibold">' . htmlspecialchars($r['date']) . '</time><div class="text-[11px] text-ink-500 mt-1">' . $views . ' просмотров</div></div>'
                 . '<svg class="w-5 h-5 text-ink-400 shrink-0 self-center sm:hidden group-hover:text-sage-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></div>'
@@ -404,7 +417,7 @@ try {
                     </div>
                     <div class="space-y-4">
                         <?php foreach ($announcements as $item): ?>
-                            <a href="<?= htmlspecialchars($item['url']) ?>" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6">
+                            <a href="<?= htmlspecialchars($item['url']) ?>" data-announcement-modal data-announcement-title="<?= htmlspecialchars($item['title'], ENT_QUOTES) ?>" data-announcement-date="<?= htmlspecialchars($item['date'], ENT_QUOTES) ?>" data-announcement-excerpt="<?= htmlspecialchars($item['excerpt'], ENT_QUOTES) ?>" data-announcement-views="<?= (int)($item['views'] ?? 0) ?>" data-announcement-important="<?= !empty($item['important']) ? '1' : '0' ?>" class="group block bg-white rounded-[28px] shadow-soft border border-black/5 hover:shadow-card hover:border-sage-600/40 transition-all px-4 py-5 sm:px-6">
                                 <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
                                     <div class="flex shrink-0 items-center justify-between gap-3 sm:block sm:w-24">
                                         <div>
@@ -432,7 +445,7 @@ try {
                         <?php endforeach; ?>
                     </div>
                     <div class="mt-10">
-                        <a href="<?= BASE_URL ?>/<?= ANNOUNCEMENTS_SLUG ?>" class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
+                        <a href="<?= BASE_URL ?>/<?= ANNOUNCEMENTS_SLUG ?>" data-announcements-nav class="inline-flex items-center text-sage-700 font-semibold hover:text-sage-800">
                             Все объявления
                             <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

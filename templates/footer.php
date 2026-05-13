@@ -18,6 +18,68 @@ $footerChevron = '<svg class="w-3.5 h-3.5 text-cream-100/50 group-hover:text-cre
 $footerCardLinkClass = 'group inline-flex items-center gap-2 py-1.5 text-base text-black hover:text-black/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-black/20 focus:ring-offset-2 focus:ring-offset-white rounded';
 $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-black/70 group-hover:translate-x-0.5 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>';
 ?>
+    <!-- Модалка: Сайт в разработке -->
+    <div id="dev-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4" aria-modal="true" role="dialog" aria-labelledby="dev-modal-title" style="display:none!important">
+        <div id="dev-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md mx-auto overflow-hidden animate-dev-modal">
+            <!-- Цветная полоса сверху -->
+            <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1f59b0 0%, #3b82f6 50%, #1f59b0 100%);"></div>
+
+            <div class="px-8 pt-8 pb-7 text-center">
+                <!-- Иконка -->
+                <div class="flex items-center justify-center mx-auto mb-5 w-20 h-20 rounded-2xl" style="background: linear-gradient(135deg, #e8f0fc 0%, #dbeafe 100%);">
+                    <svg class="w-10 h-10" style="color:#1f59b0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0
+                               00 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0
+                               001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0
+                               00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0
+                               00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0
+                               00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0
+                               00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0
+                               001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07
+                               2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+
+                <!-- Бейдж -->
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:#e8f0fc; color:#1f59b0;">
+                    <span class="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></span>
+                    В разработке
+                </span>
+
+                <h2 id="dev-modal-title" class="text-2xl font-bold text-gray-900 mb-3 leading-snug">
+                    Сайт обновляется
+                </h2>
+                <p class="text-gray-500 text-base leading-relaxed mb-6">
+                    Мы работаем над улучшением сайта. Некоторые разделы могут быть временно недоступны или отображаться не полностью.
+                    <br><br>
+                    Благодарим за терпение!
+                </p>
+
+                <!-- Разделитель -->
+                <div class="border-t border-gray-100 mb-6"></div>
+
+                <!-- Кнопка -->
+                <button id="dev-modal-close" type="button"
+                    class="w-full py-3 px-6 rounded-2xl text-white font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-[0.98] focus:outline-none focus:ring-4"
+                    style="background: linear-gradient(135deg, #1f59b0 0%, #2563eb 100%); focus-ring-color: rgba(31,89,176,.3);">
+                    Понятно, продолжить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes devModalIn {
+            from { opacity: 0; transform: scale(.92) translateY(16px); }
+            to   { opacity: 1; transform: scale(1)  translateY(0); }
+        }
+        .animate-dev-modal { animation: devModalIn .32s cubic-bezier(.22,.68,0,1.2) both; }
+        #dev-modal:not([style*="display:none"]) { display: flex!important; }
+    </style>
+
     <footer class="mt-auto text-cream-100" style="background-color: #253f50;" role="contentinfo">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
@@ -152,6 +214,8 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
         </div>
     </footer>
 
+    <?php require __DIR__ . '/announcement-modal.php'; ?>
+
     <!-- Нижняя навигация (мобильное приложение) — видна только на экранах < 1280px -->
     <?php $navSlug = trim($slug ?? '', '/') ?: 'index'; ?>
     <nav class="mobile-bottom-nav xl:hidden" aria-label="Главное меню">
@@ -163,7 +227,7 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
             <span>e-Resource</span>
         </a>
-        <a href="<?= BASE_URL ?>/<?= ANNOUNCEMENTS_SLUG ?>" class="mobile-bottom-nav__item<?= ($navSlug === ANNOUNCEMENTS_SLUG || str_starts_with($navSlug, ANNOUNCEMENTS_SLUG . '/')) ? ' mobile-bottom-nav__item--active' : '' ?>">
+        <a href="<?= BASE_URL ?>/<?= ANNOUNCEMENTS_SLUG ?>" data-announcements-nav class="mobile-bottom-nav__item<?= ($navSlug === ANNOUNCEMENTS_SLUG || str_starts_with($navSlug, ANNOUNCEMENTS_SLUG . '/')) ? ' mobile-bottom-nav__item--active' : '' ?>">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
             <span>Объявления</span>
         </a>
@@ -185,7 +249,8 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
     </button>
 
     <!-- ИИ-ассистент КВКИ -->
-    <script>window.BASE_URL = <?= json_encode(BASE_URL) ?>;</script>
+    <script>window.BASE_URL = <?= json_encode(BASE_URL) ?>; window.KVKI_ANNOUNCEMENTS_SLUG = <?= json_encode(ANNOUNCEMENTS_SLUG) ?>;</script>
+    <script src="<?= BASE_URL ?>/assets/js/announcements.js?v=<?= file_exists(ROOT_PATH . '/assets/js/announcements.js') ? filemtime(ROOT_PATH . '/assets/js/announcements.js') : time() ?>"></script>
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/assistant.css?v=<?= file_exists(ROOT_PATH . '/assets/css/assistant.css') ? filemtime(ROOT_PATH . '/assets/css/assistant.css') : time() ?>">
     <script src="<?= BASE_URL ?>/assets/js/assistant.js?v=<?= file_exists(ROOT_PATH . '/assets/js/assistant.js') ? filemtime(ROOT_PATH . '/assets/js/assistant.js') : time() ?>"></script>
 
@@ -342,6 +407,35 @@ $footerCardChevron = '<svg class="w-3.5 h-3.5 text-black/50 group-hover:text-bla
                 })
             }).addTo(map);
             marker.bindPopup('<strong>КВКИ</strong><br>ул. Кирпичная 8, г. Караганда');
+        })();
+        (function() {
+            const DEV_MODAL_KEY = 'kvki_dev_notice_v1';
+            const modal = document.getElementById('dev-modal');
+            const closeBtn = document.getElementById('dev-modal-close');
+            const backdrop = document.getElementById('dev-modal-backdrop');
+            if (!modal) return;
+
+            function closeDevModal() {
+                modal.style.setProperty('display', 'none', 'important');
+                document.body.style.overflow = '';
+                try { localStorage.setItem(DEV_MODAL_KEY, '1'); } catch(e) {}
+            }
+
+            let shown = false;
+            try { shown = !!localStorage.getItem(DEV_MODAL_KEY); } catch(e) {}
+
+            if (!shown) {
+                setTimeout(function() {
+                    modal.style.removeProperty('display');
+                    document.body.style.overflow = 'hidden';
+                }, 600);
+            }
+
+            closeBtn?.addEventListener('click', closeDevModal);
+            backdrop?.addEventListener('click', closeDevModal);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.style.display.includes('none')) closeDevModal();
+            });
         })();
         (function() {
             const showMoreBtn = document.getElementById('instagram-show-more');
