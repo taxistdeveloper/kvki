@@ -76,12 +76,14 @@
         function openPanel() {
             panel.hidden = false;
             panel.classList.add('is-open');
+            container.classList.add('is-panel-open');
             container.setAttribute('aria-hidden', 'false');
             inputEl.focus();
         }
 
         function closePanel() {
             panel.classList.remove('is-open');
+            container.classList.remove('is-panel-open');
             panel.hidden = true;
             container.setAttribute('aria-hidden', 'true');
         }

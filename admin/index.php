@@ -49,6 +49,12 @@ switch ($action) {
     case 'partners':
         require __DIR__ . '/pages/partners.php';
         break;
+    case 'videos':
+        require __DIR__ . '/pages/videos.php';
+        break;
+    case 'anticor':
+        require __DIR__ . '/pages/anticor.php';
+        break;
     case 'instagram':
         require __DIR__ . '/pages/instagram.php';
         break;
